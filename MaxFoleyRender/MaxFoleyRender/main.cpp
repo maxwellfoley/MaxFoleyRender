@@ -52,7 +52,7 @@ int main(int argc, const char * argv[]) {
 		return 1;
 	}
 	
-	SDL_Surface *bmp = SDL_LoadBMP("hello.bmp");
+	SDL_Surface *bmp = SDL_LoadBMP("hello_world.bmp");
 	if (bmp == nullptr){
 		SDL_DestroyRenderer(ren);
 		SDL_DestroyWindow(win);
