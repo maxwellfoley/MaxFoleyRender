@@ -1,0 +1,7 @@
+# compiled object files
+*.slo
+*.lo
+*.o
+*.obj
+
+**/resources

@@ -7,22 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9429D09C200F2C2B005D3ABE /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9429D09B200F2C2B005D3ABE /* SDL2.framework */; };
+		9429D09E200F2D0B005D3ABE /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9429D09D200F2D0B005D3ABE /* Cocoa.framework */; };
 		946720061FCB7404004D5287 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 946720051FCB7404004D5287 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		946720001FCB7404004D5287 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 7;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9429D09B200F2C2B005D3ABE /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		9429D09D200F2D0B005D3ABE /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		946720021FCB7404004D5287 /* MaxFoleyRender */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MaxFoleyRender; sourceTree = BUILT_PRODUCTS_DIR; };
 		946720051FCB7404004D5287 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		9467200C1FCB7538004D5287 /* Ray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ray.h; sourceTree = "<group>"; };
@@ -39,12 +43,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9429D09E200F2D0B005D3ABE /* Cocoa.framework in Frameworks */,
+				9429D09C200F2C2B005D3ABE /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9429D09A200F2C2B005D3ABE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9429D09D200F2D0B005D3ABE /* Cocoa.framework */,
+				9429D09B200F2C2B005D3ABE /* SDL2.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		94671FF91FCB7404004D5287 = {
 			isa = PBXGroup;
 			children = (
@@ -57,6 +72,7 @@
 				9467200E1FCB9326004D5287 /* Color.h */,
 				946720041FCB7404004D5287 /* MaxFoleyRender */,
 				946720031FCB7404004D5287 /* Products */,
+				9429D09A200F2C2B005D3ABE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -232,6 +248,10 @@
 		9467200A1FCB7404004D5287 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				HEADER_SEARCH_PATHS = /opt/local/include;
 				LIBRARY_SEARCH_PATHS = /opt/local/lib;
 				OTHER_LDFLAGS = "-larmadillo";
@@ -242,6 +262,10 @@
 		9467200B1FCB7404004D5287 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				HEADER_SEARCH_PATHS = /opt/local/include;
 				LIBRARY_SEARCH_PATHS = /opt/local/lib;
 				OTHER_LDFLAGS = "-larmadillo";

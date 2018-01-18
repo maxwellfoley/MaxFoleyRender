@@ -28,3 +28,4 @@ class MFR::Color {
 }
 
 #endif /* Color_h */
+
