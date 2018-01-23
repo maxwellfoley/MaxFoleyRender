@@ -10,6 +10,13 @@
 		9429D09C200F2C2B005D3ABE /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9429D09B200F2C2B005D3ABE /* SDL2.framework */; };
 		9429D09E200F2D0B005D3ABE /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9429D09D200F2D0B005D3ABE /* Cocoa.framework */; };
 		9429D0A120104AFC005D3ABE /* hello_world.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9429D0A020104AFC005D3ABE /* hello_world.bmp */; };
+		9429D0A32015AAC3005D3ABE /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9429D0A22015AAC3005D3ABE /* libpng.a */; };
+		9429D0A82015ABE1005D3ABE /* libpng.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9429D0A42015ABE1005D3ABE /* libpng.dylib */; };
+		9429D0A92015ABE1005D3ABE /* libpng16.16.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9429D0A52015ABE1005D3ABE /* libpng16.16.dylib */; };
+		9429D0AA2015ABE1005D3ABE /* libpng16.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9429D0A62015ABE1005D3ABE /* libpng16.a */; };
+		9429D0AB2015ABE1005D3ABE /* libpng16.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9429D0A72015ABE1005D3ABE /* libpng16.dylib */; };
+		9429D0AE2015B33F005D3ABE /* libpngwriter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9429D0AC2015B33F005D3ABE /* libpngwriter.a */; };
+		9429D0AF2015B33F005D3ABE /* libpngwriter.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9429D0AD2015B33F005D3ABE /* libpngwriter.dylib */; };
 		946720061FCB7404004D5287 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 946720051FCB7404004D5287 /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +37,13 @@
 		9429D09B200F2C2B005D3ABE /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		9429D09D200F2D0B005D3ABE /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		9429D0A020104AFC005D3ABE /* hello_world.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = hello_world.bmp; path = resources/hello_world.bmp; sourceTree = "<group>"; };
+		9429D0A22015AAC3005D3ABE /* libpng.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng.a; path = ../../../../../opt/local/lib/libpng.a; sourceTree = "<group>"; };
+		9429D0A42015ABE1005D3ABE /* libpng.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpng.dylib; path = ../../../../../opt/local/lib/libpng.dylib; sourceTree = "<group>"; };
+		9429D0A52015ABE1005D3ABE /* libpng16.16.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpng16.16.dylib; path = ../../../../../opt/local/lib/libpng16.16.dylib; sourceTree = "<group>"; };
+		9429D0A62015ABE1005D3ABE /* libpng16.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng16.a; path = ../../../../../opt/local/lib/libpng16.a; sourceTree = "<group>"; };
+		9429D0A72015ABE1005D3ABE /* libpng16.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpng16.dylib; path = ../../../../../opt/local/lib/libpng16.dylib; sourceTree = "<group>"; };
+		9429D0AC2015B33F005D3ABE /* libpngwriter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpngwriter.a; path = ../../../../../opt/local/lib/libpngwriter.a; sourceTree = "<group>"; };
+		9429D0AD2015B33F005D3ABE /* libpngwriter.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpngwriter.dylib; path = ../../../../../opt/local/lib/libpngwriter.dylib; sourceTree = "<group>"; };
 		946720021FCB7404004D5287 /* MaxFoleyRender */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MaxFoleyRender; sourceTree = BUILT_PRODUCTS_DIR; };
 		946720051FCB7404004D5287 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		9467200C1FCB7538004D5287 /* Ray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ray.h; sourceTree = "<group>"; };
@@ -46,6 +60,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9429D0AE2015B33F005D3ABE /* libpngwriter.a in Frameworks */,
+				9429D0AF2015B33F005D3ABE /* libpngwriter.dylib in Frameworks */,
+				9429D0A82015ABE1005D3ABE /* libpng.dylib in Frameworks */,
+				9429D0A92015ABE1005D3ABE /* libpng16.16.dylib in Frameworks */,
+				9429D0AA2015ABE1005D3ABE /* libpng16.a in Frameworks */,
+				9429D0AB2015ABE1005D3ABE /* libpng16.dylib in Frameworks */,
+				9429D0A32015AAC3005D3ABE /* libpng.a in Frameworks */,
 				9429D09E200F2D0B005D3ABE /* Cocoa.framework in Frameworks */,
 				9429D09C200F2C2B005D3ABE /* SDL2.framework in Frameworks */,
 			);
@@ -57,6 +78,13 @@
 		9429D09A200F2C2B005D3ABE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9429D0AC2015B33F005D3ABE /* libpngwriter.a */,
+				9429D0AD2015B33F005D3ABE /* libpngwriter.dylib */,
+				9429D0A42015ABE1005D3ABE /* libpng.dylib */,
+				9429D0A52015ABE1005D3ABE /* libpng16.16.dylib */,
+				9429D0A62015ABE1005D3ABE /* libpng16.a */,
+				9429D0A72015ABE1005D3ABE /* libpng16.dylib */,
+				9429D0A22015AAC3005D3ABE /* libpng.a */,
 				9429D09D200F2D0B005D3ABE /* Cocoa.framework */,
 				9429D09B200F2C2B005D3ABE /* SDL2.framework */,
 			);
