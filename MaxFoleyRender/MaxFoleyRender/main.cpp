@@ -187,6 +187,8 @@ int main(int argc, const char * argv[]) {
 	
 Figure out how to load scenes in order to get camera, light, material, and mesh info
 And what format to use?
+	-- first just bring objects in, make a reader for the .obj format
+	-- then just put lights and camera in manually in the code, do the rendering logic and figure out shit for that later
 
 Implement all the rendering logic 
 

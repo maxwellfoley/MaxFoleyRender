@@ -17,6 +17,7 @@
 		9429D0AB2015ABE1005D3ABE /* libpng16.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9429D0A72015ABE1005D3ABE /* libpng16.dylib */; };
 		9429D0AE2015B33F005D3ABE /* libpngwriter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9429D0AC2015B33F005D3ABE /* libpngwriter.a */; };
 		9429D0AF2015B33F005D3ABE /* libpngwriter.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9429D0AD2015B33F005D3ABE /* libpngwriter.dylib */; };
+		9429D0B4201709C6005D3ABE /* SceneObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9429D0B3201709C6005D3ABE /* SceneObject.cpp */; };
 		946720061FCB7404004D5287 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 946720051FCB7404004D5287 /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,9 @@
 		9429D0A72015ABE1005D3ABE /* libpng16.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpng16.dylib; path = ../../../../../opt/local/lib/libpng16.dylib; sourceTree = "<group>"; };
 		9429D0AC2015B33F005D3ABE /* libpngwriter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpngwriter.a; path = ../../../../../opt/local/lib/libpngwriter.a; sourceTree = "<group>"; };
 		9429D0AD2015B33F005D3ABE /* libpngwriter.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpngwriter.dylib; path = ../../../../../opt/local/lib/libpngwriter.dylib; sourceTree = "<group>"; };
+		9429D0B02017040E005D3ABE /* Tri.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tri.h; sourceTree = "<group>"; };
+		9429D0B22017066A005D3ABE /* SceneObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneObject.h; sourceTree = "<group>"; };
+		9429D0B3201709C6005D3ABE /* SceneObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneObject.cpp; sourceTree = "<group>"; };
 		946720021FCB7404004D5287 /* MaxFoleyRender */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MaxFoleyRender; sourceTree = BUILT_PRODUCTS_DIR; };
 		946720051FCB7404004D5287 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		9467200C1FCB7538004D5287 /* Ray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ray.h; sourceTree = "<group>"; };
@@ -94,12 +98,15 @@
 		94671FF91FCB7404004D5287 = {
 			isa = PBXGroup;
 			children = (
+				9429D0B22017066A005D3ABE /* SceneObject.h */,
+				9429D0B3201709C6005D3ABE /* SceneObject.cpp */,
 				9429D0A020104AFC005D3ABE /* hello_world.bmp */,
 				946720121FCB9CBF004D5287 /* Camera.h */,
 				946720101FCB98ED004D5287 /* Surfel.h */,
 				946720111FCB9C16004D5287 /* Material.h */,
 				9467200C1FCB7538004D5287 /* Ray.h */,
 				9467200D1FCB7BA4004D5287 /* Vector.h */,
+				9429D0B02017040E005D3ABE /* Tri.h */,
 				9467200F1FCB958D004D5287 /* Light.h */,
 				9467200E1FCB9326004D5287 /* Color.h */,
 				946720041FCB7404004D5287 /* MaxFoleyRender */,
@@ -182,6 +189,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				946720061FCB7404004D5287 /* main.cpp in Sources */,
+				9429D0B4201709C6005D3ABE /* SceneObject.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

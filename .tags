@@ -7,14 +7,16 @@
 Camera	MaxFoleyRender/Camera.h	/^		MFR::Camera(){}$/;"	f	class:MFR::Camera::MFR
 Camera	MaxFoleyRender/Camera.h	/^class MFR::Camera$/;"	c	class:MFR
 Camera_h	MaxFoleyRender/Camera.h	/^#define Camera_h$/;"	d
-Color	MaxFoleyRender/Color.h	/^		MFR::Color(float _r, float _g, float _b)$/;"	f	class:MFR::Color::MFR
-Color	MaxFoleyRender/Color.h	/^		MFR::Color(float _r, float _g, float _b, float _a)$/;"	f	class:MFR::Color::MFR
-Color	MaxFoleyRender/Color.h	/^class MFR::Color {$/;"	c	class:MFR
+Color	MaxFoleyRender/Color.h	/^			Color(float _r, float _g, float _b)$/;"	f	class:MFR::Color
+Color	MaxFoleyRender/Color.h	/^			Color(float _r, float _g, float _b, float _a)$/;"	f	class:MFR::Color
+Color	MaxFoleyRender/Color.h	/^			Color(void)$/;"	f	class:MFR::Color
+Color	MaxFoleyRender/Color.h	/^	class Color {$/;"	c	namespace:MFR
 Color_h	MaxFoleyRender/Color.h	/^#define Color_h$/;"	d
 Light	MaxFoleyRender/Light.h	/^		MFR::Light(MFR::Point _origin, float _strength, MFR::LightType _type)$/;"	f	class:MFR::Light::MFR
 Light	MaxFoleyRender/Light.h	/^class MFR::Light {$/;"	c	class:MFR
 LightType	MaxFoleyRender/Light.h	/^enum MFR::LightType{Point};$/;"	g	class:MFR
 Light_h	MaxFoleyRender/Light.h	/^#define Light_h$/;"	d
+MFR	MaxFoleyRender/Color.h	/^namespace MFR {$/;"	n
 MFR	MaxFoleyRender/Vector.h	/^namespace MFR {$/;"	n
 Material	MaxFoleyRender/Material.h	/^		MFR::Material(MFR::Color _lambertian)$/;"	f	class:MFR::Material::MFR
 Material	MaxFoleyRender/Material.h	/^class MFR::Material$/;"	c	class:MFR
@@ -30,15 +32,18 @@ Vector	MaxFoleyRender/Vector.h	/^			Vector(arma::fvec arma_Vector)$/;"	f	class:M
 Vector	MaxFoleyRender/Vector.h	/^			Vector(float x, float y, float z)$/;"	f	class:MFR::Vector
 Vector	MaxFoleyRender/Vector.h	/^	class Vector {$/;"	c	namespace:MFR
 Vector_h	MaxFoleyRender/Vector.h	/^#define Vector_h$/;"	d
-a	MaxFoleyRender/Color.h	/^		float a;$/;"	m	class:MFR::Color
+a	MaxFoleyRender/Color.h	/^			float a;$/;"	m	class:MFR::Color
 arma_Vector	MaxFoleyRender/Vector.h	/^			arma::fvec arma_Vector;$/;"	m	class:MFR::Vector
-b	MaxFoleyRender/Color.h	/^		float b;$/;"	m	class:MFR::Color
+b	MaxFoleyRender/Color.h	/^			float b;$/;"	m	class:MFR::Color
+calculateImage	MaxFoleyRender/MaxFoleyRender/main.cpp	/^void calculateImage(MFR::Color * buf, int width, int height)$/;"	f
 cross	MaxFoleyRender/Vector.h	/^			Vector cross(const Vector & rhs)$/;"	f	class:MFR::Vector
 direction	MaxFoleyRender/Ray.h	/^        Vector direction;$/;"	m	class:MFR::Ray
 dot	MaxFoleyRender/Vector.h	/^			float dot(const Vector & rhs)$/;"	f	class:MFR::Vector
 focalLength	MaxFoleyRender/Camera.h	/^		float focalLength;$/;"	m	class:MFR::Camera
 fov	MaxFoleyRender/Camera.h	/^		float fov;$/;"	m	class:MFR::Camera
-g	MaxFoleyRender/Color.h	/^		float g;$/;"	m	class:MFR::Color
+g	MaxFoleyRender/Color.h	/^			float g;$/;"	m	class:MFR::Color
+getBlankTexture	MaxFoleyRender/MaxFoleyRender/main.cpp	/^SDL_Texture * getBlankTexture(SDL_Window * win, SDL_Renderer * ren)$/;"	f
+getImageTexture	MaxFoleyRender/MaxFoleyRender/main.cpp	/^SDL_Texture * getImageTexture(char * filename, SDL_Window * win, SDL_Renderer * ren)$/;"	f
 lambertian	MaxFoleyRender/Material.h	/^		MFR::Color lambertian;$/;"	m	class:MFR::Material
 length	MaxFoleyRender/Vector.h	/^			float length() {$/;"	f	class:MFR::Vector
 main	MaxFoleyRender/MaxFoleyRender/main.cpp	/^int main(int argc, const char * argv[]) {$/;"	f
@@ -57,12 +62,14 @@ origin	MaxFoleyRender/Light.h	/^		MFR::Point origin;$/;"	m	class:MFR::Light
 origin	MaxFoleyRender/Ray.h	/^        Point origin;$/;"	m	class:MFR::Ray
 position	MaxFoleyRender/Camera.h	/^		MFR::Point position;$/;"	m	class:MFR::Camera
 position	MaxFoleyRender/Surfel.h	/^		MFR::Point position;$/;"	m	class:MFR::Surfel
-r	MaxFoleyRender/Color.h	/^		float r;$/;"	m	class:MFR::Color
+r	MaxFoleyRender/Color.h	/^			float r;$/;"	m	class:MFR::Color
 rotation	MaxFoleyRender/Camera.h	/^		MFR::Point rotation;$/;"	m	class:MFR::Camera
 strength	MaxFoleyRender/Light.h	/^		float strength;$/;"	m	class:MFR::Light
 toString	MaxFoleyRender/Vector.h	/^			std::string toString()$/;"	f	class:MFR::Vector
 type	MaxFoleyRender/Light.h	/^		MFR::LightType type;$/;"	m	class:MFR::Light
 unit	MaxFoleyRender/Vector.h	/^			Vector unit() {$/;"	f	class:MFR::Vector
+writeColorBufferToTexture	MaxFoleyRender/MaxFoleyRender/main.cpp	/^void writeColorBufferToTexture(SDL_Texture * tex, MFR::Color * buf)$/;"	f
+writeImageToFile	MaxFoleyRender/MaxFoleyRender/main.cpp	/^void writeImageToFile(MFR::Color * buf, char * filename, int width, int height)$/;"	f
 x	MaxFoleyRender/Vector.h	/^			float x(){$/;"	f	class:MFR::Vector
 y	MaxFoleyRender/Vector.h	/^			float y(){$/;"	f	class:MFR::Vector
 z	MaxFoleyRender/Vector.h	/^			float z(){$/;"	f	class:MFR::Vector

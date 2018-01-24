@@ -131,6 +131,6 @@ namespace MFR {
 			}
 	};
 
-	//using Point = MFR::Vector;
+	using Point = MFR::Vector;
 }
 #endif /* Vector_h */

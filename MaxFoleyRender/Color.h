@@ -15,7 +15,6 @@ namespace MFR {
 			float r;
 			float g;
 			float b;
-			float a;
 		
 			Color(void)
 			{/*
@@ -24,20 +23,15 @@ namespace MFR {
 				g = 0.0;
 				b = 0.0;				
 			*/
-				a = 1.0;
 				r = 0.0;
 				g = 0.0;
 				b = 0.0;
 			}
-			
-			Color(float _r, float _g, float _b, float _a)
-			{
-				r = _r; g = _g; b = _b; a = _a;
-			}
+
 
 			Color(float _r, float _g, float _b)
 			{
-				r = _r; g = _g; b = _b; a = 1.0;
+				r = _r; g = _g; b = _b;
 			}
 		
 
