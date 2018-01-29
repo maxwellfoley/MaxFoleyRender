@@ -20,11 +20,11 @@ namespace MFR {
 	class SceneObject {
 		public:
 			std::vector<Tri> mesh;
-			Point origin;
+			Point position;
 			Vector rotation;
 			Vector scale;
 			std::map<std::string, std::shared_ptr<Material>> materials;
-			std::map<std::shared_ptr<Material>, std::vector<int>> materialIndexes;
+			//std::map<std::shared_ptr<Material>, std::vector<int>> materialIndexes;
 		
 			SceneObject(std::string filename)
 			{

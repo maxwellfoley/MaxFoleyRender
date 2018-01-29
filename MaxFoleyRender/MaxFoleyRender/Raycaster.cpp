@@ -46,7 +46,7 @@ Color Raycaster::GetPixelColor(std::shared_ptr<Camera> camera, std::shared_ptr<S
 	if(surfel)
 	{
 		//lambertian
-		Color lamb =  surfel->material.diffuse;
+		Color lamb =  surfel->material->diffuse;
 		Color color;
 		if(indirectRays==0) {color = lamb*.2f;}
 
@@ -93,7 +93,7 @@ Color Raycaster::GetPixelColor(std::shared_ptr<Camera> camera, std::shared_ptr<S
 			Ray indirectLightRay = Ray(surfel->position, indirectLightDir.unit());
 			Color otherLamb = Color(0.0,0.0,0.0);
 			std::shared_ptr<Surfel> indirectSurfel = CastSingleRay(scene,indirectLightRay);
-			if(indirectSurfel) {otherLamb = indirectSurfel->material.diffuse; }
+			if(indirectSurfel) {otherLamb = indirectSurfel->material->diffuse; }
 			float multiplier = indirectLightDir.dot(surfel->normal);
 
 			Color addTo = otherLamb * multiplier / indirectRays;
@@ -147,38 +147,7 @@ std::shared_ptr<Surfel> Raycaster::CastSingleRay(std::shared_ptr<Scene> scene, R
 	if(minI > -1)
 	{
 
-			//debugPrintf("Triangle index %i\n",minI);
-			//debugPrintf("barycenters %f %f %f\n",minB[0],minB[1],minB[2]);
-		//	debugPrintf("distance %f \n",minT);
-
-			//all of this just to get the surfel information
-		
-		
-			//TODO: pretty much all of this needs to be different
-		
-		
 			float distance = minT;
-		
-			/*
-			Point2 texCoord =  Point2(0.0f,0.0f); 
-			Point2 triUVs[3] ;
-
-			for(int j=0;j <3; j++)
-			{
-				Point2 equivUV = tt.vertexArray().vertex[tt[minI].index[j]].texCoord0;
-				triUVs[j] = tt[minI].texCoord(tt.vertexArray(), j);
-				texCoord += minB[j]*triUVs[j];
-			}
-			
-			hit.u = texCoord.x;
-			hit.v = texCoord.y;
-			
-			lazy_ptr<UniversalMaterial> material = tt[minI].material();
-
-			
-			shared_ptr<Surfel> surfel = std::make_shared<Surfel>(tt[minI],hit.u,hit.v,minI,tt.vertexArray(),false);
-			surfel->sample(tt[minI],hit.u,hit.v,minI,tt.vertexArray(),false,material.resolve().get());
-			surfel->position = P+w*minT;*/
 
 			Vector normal = ((tt[minI].points[1] - tt[minI].points[0]).cross(tt[minI].points[2] - tt[minI].points[1])).unit();
 			std::shared_ptr<Surfel> surfel = std::make_shared<Surfel>(ray.origin + distance*ray.direction,normal,tt[minI].material);
@@ -209,7 +178,7 @@ bool Raycaster::IntersectTriangle(Ray ray, Tri t, float b[3], float& dist)
 	 float a = e_1.dot(q);
 
 	// Backfacing / nearly parallel, or close to the limit of precision?
- 	if ((n.dot(w) >= 0) || (abs(a) <= .0000001)) return false;
+ 	if ((n.dot(w) >= 0) || (std::abs(a) <= .0000001)) return false;
 	
 	 Vector s = (P - t.points[0]) / a;
 	 Vector r = s.cross(e_1);
@@ -227,9 +196,6 @@ bool Raycaster::IntersectTriangle(Ray ray, Tri t, float b[3], float& dist)
 
 
 /* TODO:
-Figure out how to calculate biradiance from a light
-
-Do the vector hemirandom thing wq
 
 Consider refactoring the way materials are attached to tris
 

@@ -17,9 +17,12 @@ namespace MFR {
 		public:
 			Point position;
 			Vector normal;
-			Material material;
+			std::shared_ptr<Material> material;
+		
+			Surfel()
+			{}
 	
-			Surfel(Point _position, Vector _normal, Material _material)
+			Surfel(Point _position, Vector _normal, std::shared_ptr<Material> _material)
 			{
 				position = _position; normal = _normal; material = _material;
 			}

@@ -42,6 +42,7 @@ namespace MFR {
 				{
 					std::vector<Tri> mesh = (*it).mesh;
 					
+					/*
 					//unwind materialIndexes for this object so that we get array of triangle index to material
 					std::map<std::shared_ptr<Material>, std::vector<int>> materialIndexes = (*it).materialIndexes;
 					
@@ -59,15 +60,13 @@ namespace MFR {
 							//add it to materials vector at specified index
 							materialList.insert(materials.begin() + materials, material);
 						}
-					}
+					}*/
 					
 				
 					//now prep the tris
 					for(std::vector<Tri>::iterator it2b = mesh.begin(); it2b!=mesh.end(); ++it2b)
 					{
-						int offset = it2b-mesh.begin();
 						Tri t = *it2b;
-						t.material = *(materialList.begin()+offset);
 						
 						t.points[0].scale((*it).scale);
 						t.points[1].scale((*it).scale);

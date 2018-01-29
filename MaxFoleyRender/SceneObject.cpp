@@ -67,12 +67,15 @@ void MFR::SceneObject::loadFromObjFile(std::string filename) {
 			}
 			
 			//now add the face information to the vector
-			mesh.push_back(Tri(vertices[std::stoi(tokens[0])],
+			Tri tri = Tri(vertices[std::stoi(tokens[0])],
 				vertices[std::stoi(tokens[1])],
-				vertices[std::stoi(tokens[2])]));
+				vertices[std::stoi(tokens[2])]);
 			
 			//add link to the material
-			materialIndexes[currentMaterial].push_back(mesh.size()-1);
+			tri.material = currentMaterial;
+			
+			mesh.push_back(tri);
+			
 		}
 		else if(firstToken == "mtllib") {
 			//load the materials from the file and place them in the list

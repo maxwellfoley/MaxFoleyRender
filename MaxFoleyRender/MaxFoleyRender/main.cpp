@@ -152,8 +152,8 @@ int main(int argc, const char * argv[]) {
 	
 	MFR::SceneObject canal = MFR::SceneObject("car-parsche-sport.obj");
 	std::cout << canal << std::endl;
-	std::vector<MFR::Material> ms = MFR::Material::getMaterialsFromFile("track-tire.mtl" );
-	std::cout << ms[0] << std::endl;
+	std::vector<std::shared_ptr<MFR::Material>> ms = MFR::Material::getMaterialsFromFile("track-tire.mtl" );
+	std::cout << (*ms[0]) << std::endl;
 	
 	while(!quit)
 	{

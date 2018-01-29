@@ -20,10 +20,18 @@ namespace MFR {
 			float strength;
 			LightType type;
 			bool shadowsEnabled;
+			Color color;
 	
 			Light(Point _origin, float _strength, LightType _type)
 			{
 				origin = _origin; strength = _strength; type = _type;
+			}
+		
+			float biradiance(Point p)
+			{
+				//if(LightType = PointLght)
+				float intensity = 1/pow((p-origin).length(),2);
+				return intensity * strength;
 			}
 		};
 }

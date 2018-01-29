@@ -167,7 +167,7 @@ namespace MFR {
 				return v;
 			}
 		
-			Vector & rotate(Vector rotation)
+			Vector rotate(Vector rotation)
 			{
 				arma::fmat matX;
 				matX << 1.0 << 0.0 << 0.0
@@ -194,6 +194,36 @@ namespace MFR {
 				returnVal << arma_Vector(0) * scale.x() << arma_Vector(1) * scale.y() << arma_Vector(2) * scale.z();
 				Vector v = Vector(returnVal);
 				return v;
+			}
+		
+			static Vector hemiRandom(Vector v)
+			{
+				//get random numbers between -pi/2 and pi/2
+				float pi = 3.14159265358979323846;
+				float xArcRot = static_cast <float> (rand()) / static_cast <float> (RAND_MAX/pi);
+				xArcRot -= (pi/2);
+				float yArcRot = static_cast <float> (rand()) / static_cast <float> (RAND_MAX/pi);
+				yArcRot -= (pi/2);
+
+				//convert vector from cartesian to spherical, add the random angles, convert back
+				//http://tutorial.math.lamar.edu/Classes/CalcIII/SphericalCoords.aspx
+				
+				//cartesian to spherical
+				float distance = v.length();
+				float rho = acos(v.z()/distance);
+				float theta = asin(v.y()/(distance*sin(rho)));
+				
+				rho+=xArcRot;
+				theta+=yArcRot;
+				
+				//spherical to cartesian
+				float x = distance*sin(rho)*cos(theta);
+				float y = distance*sin(rho)*sin(theta);
+				float z = distance*cos(rho);
+				
+				Vector returnVal = Vector(x,y,z);
+				return returnVal;
+
 			}
 
 
