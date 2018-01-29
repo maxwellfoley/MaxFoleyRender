@@ -9,11 +9,19 @@
 #ifndef Ray_h
 #define Ray_h
 
-class MFR::Ray {
-    public:
-        Point origin;
-        Vector direction;
-    
-};
+#include "Vector.h"
+
+namespace MFR {
+	class Ray {
+    	public:
+        	Point origin;
+        	Vector direction;
+			Ray(Point o, Vector dir)
+			{
+				origin = o;
+				direction = dir;
+			}
+	};
+}
 #endif /* Ray_h */
 

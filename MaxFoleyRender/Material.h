@@ -37,12 +37,20 @@ namespace MFR
 				illumMode = lambert;
 			}
 		
-			static std::vector<Material> getMaterialsFromFile(std::string filename)
+			friend bool operator< (const Material& a, const Material& b){
+				return a.name < b.name;
+			}
+		
+			friend std::ostream& operator<<(std::ostream &strm, const MFR::Material &mat) {
+				return strm << "Material with ambient " << mat.ambient << ", diffuse " << mat.diffuse << ", specular " << mat.specular << " specularExponent " << mat.specularExponent << ", illumination mode " << mat.illumMode;
+			}
+		
+			static std::vector<std::shared_ptr<Material>> getMaterialsFromFile(std::string filename)
 			{
 				std::string line;
 				std::ifstream infile(filename);
 				std::string curMaterial = "";
-				std::vector<Material> output;
+				std::vector<std::shared_ptr<Material>> output;
 				
 				while (std::getline(infile, line))
 				{
@@ -57,7 +65,7 @@ namespace MFR
 						curMaterial = newMtlName;
 						Material m;
 						m.name = curMaterial;
-						output.push_back(m);
+						output.push_back(std::make_shared<Material>(m));
 					}
 					else if(firstToken == "Ka")
 					{
@@ -65,7 +73,7 @@ namespace MFR
 						iss >> r;
 						iss >> g;
 						iss >> b;
-						output[output.size()-1].ambient = Color(std::stof(r),std::stof(g),std::stof(b));
+						output[output.size()-1]->ambient = Color(std::stof(r),std::stof(g),std::stof(b));
 					}
 					else if(firstToken == "Kd")
 					{
@@ -73,7 +81,7 @@ namespace MFR
 						iss >> r;
 						iss >> g;
 						iss >> b;
-						output[output.size()-1].diffuse = Color(std::stof(r),std::stof(g),std::stof(b));
+						output[output.size()-1]->diffuse = Color(std::stof(r),std::stof(g),std::stof(b));
 					
 					}
 					else if(firstToken == "Ks")
@@ -82,14 +90,14 @@ namespace MFR
 						iss >> r;
 						iss >> g;
 						iss >> b;
-						output[output.size()-1].specular = Color(std::stof(r),std::stof(g),std::stof(b));
+						output[output.size()-1]->specular = Color(std::stof(r),std::stof(g),std::stof(b));
 					
 					}
 					else if(firstToken == "Ns")
 					{
 						std::string e;
 						iss >> e;
-						output[output.size()-1].specularExponent = std::stof(e);
+						output[output.size()-1]->specularExponent = std::stof(e);
 					}
 					else if(firstToken == "illum")
 					{
@@ -98,9 +106,9 @@ namespace MFR
 						int illumNum = std::stoi(illumToken);
 						switch(illumNum)
 						{
-							case 0: output[output.size()-1].illumMode = flat; break;
-							case 1: output[output.size()-1].illumMode = lambert; break;
-							case 2: output[output.size()-1].illumMode = blinnPhong; break;
+							case 0: output[output.size()-1]->illumMode = flat; break;
+							case 1: output[output.size()-1]->illumMode = lambert; break;
+							case 2: output[output.size()-1]->illumMode = blinnPhong; break;
 								
 						}
 					}

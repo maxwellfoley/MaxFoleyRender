@@ -9,16 +9,20 @@
 #ifndef Camera_h
 #define Camera_h
 
-class MFR::Camera
-{
-	public:
-		MFR::Point position;
-		MFR::Point rotation;
-		float fov;
-		float focalLength;
-	
-		MFR::Camera(){}
-}
+#include "Vector.h"
 
+namespace MFR {
+
+	class Camera
+	{
+		public:
+			Point position;
+			Point rotation;
+			float fov;
+			float focalLength;
+	
+			Camera(){}
+	};
+}
 
 #endif /* Camera_h */

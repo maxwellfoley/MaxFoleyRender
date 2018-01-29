@@ -19,6 +19,9 @@
 		9429D0AF2015B33F005D3ABE /* libpngwriter.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9429D0AD2015B33F005D3ABE /* libpngwriter.dylib */; };
 		9429D0B4201709C6005D3ABE /* SceneObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9429D0B3201709C6005D3ABE /* SceneObject.cpp */; };
 		946720061FCB7404004D5287 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 946720051FCB7404004D5287 /* main.cpp */; };
+		94DE56C520199501004B1FBF /* randomtest.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 94DE56C420199501004B1FBF /* randomtest.txt */; };
+		94DE56C720199508004B1FBF /* canal-hill.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 94DE56C620199508004B1FBF /* canal-hill.obj */; };
+		94DE56CE201E671B004B1FBF /* Raycaster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94DE56CD201E671B004B1FBF /* Raycaster.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +32,8 @@
 			dstSubfolderSpec = 7;
 			files = (
 				9429D0A120104AFC005D3ABE /* hello_world.bmp in CopyFiles */,
+				94DE56C520199501004B1FBF /* randomtest.txt in CopyFiles */,
+				94DE56C720199508004B1FBF /* canal-hill.obj in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,18 +50,23 @@
 		9429D0A72015ABE1005D3ABE /* libpng16.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpng16.dylib; path = ../../../../../opt/local/lib/libpng16.dylib; sourceTree = "<group>"; };
 		9429D0AC2015B33F005D3ABE /* libpngwriter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpngwriter.a; path = ../../../../../opt/local/lib/libpngwriter.a; sourceTree = "<group>"; };
 		9429D0AD2015B33F005D3ABE /* libpngwriter.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpngwriter.dylib; path = ../../../../../opt/local/lib/libpngwriter.dylib; sourceTree = "<group>"; };
-		9429D0B02017040E005D3ABE /* Tri.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tri.h; sourceTree = "<group>"; };
-		9429D0B22017066A005D3ABE /* SceneObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneObject.h; sourceTree = "<group>"; };
-		9429D0B3201709C6005D3ABE /* SceneObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneObject.cpp; sourceTree = "<group>"; };
+		9429D0B02017040E005D3ABE /* Tri.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Tri.h; path = ../Tri.h; sourceTree = "<group>"; };
+		9429D0B22017066A005D3ABE /* SceneObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SceneObject.h; path = ../SceneObject.h; sourceTree = "<group>"; };
+		9429D0B3201709C6005D3ABE /* SceneObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SceneObject.cpp; path = ../SceneObject.cpp; sourceTree = "<group>"; };
 		946720021FCB7404004D5287 /* MaxFoleyRender */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MaxFoleyRender; sourceTree = BUILT_PRODUCTS_DIR; };
 		946720051FCB7404004D5287 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		9467200C1FCB7538004D5287 /* Ray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ray.h; sourceTree = "<group>"; };
-		9467200D1FCB7BA4004D5287 /* Vector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
-		9467200E1FCB9326004D5287 /* Color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
-		9467200F1FCB958D004D5287 /* Light.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Light.h; sourceTree = "<group>"; };
-		946720101FCB98ED004D5287 /* Surfel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Surfel.h; sourceTree = "<group>"; };
-		946720111FCB9C16004D5287 /* Material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
-		946720121FCB9CBF004D5287 /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		9467200C1FCB7538004D5287 /* Ray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Ray.h; path = ../Ray.h; sourceTree = "<group>"; };
+		9467200D1FCB7BA4004D5287 /* Vector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Vector.h; path = ../Vector.h; sourceTree = "<group>"; };
+		9467200E1FCB9326004D5287 /* Color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Color.h; path = ../Color.h; sourceTree = "<group>"; };
+		9467200F1FCB958D004D5287 /* Light.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Light.h; path = ../Light.h; sourceTree = "<group>"; };
+		946720101FCB98ED004D5287 /* Surfel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Surfel.h; path = ../Surfel.h; sourceTree = "<group>"; };
+		946720111FCB9C16004D5287 /* Material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Material.h; path = ../Material.h; sourceTree = "<group>"; };
+		946720121FCB9CBF004D5287 /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Camera.h; path = ../Camera.h; sourceTree = "<group>"; };
+		94DE56C420199501004B1FBF /* randomtest.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = randomtest.txt; path = resources/randomtest.txt; sourceTree = "<group>"; };
+		94DE56C620199508004B1FBF /* canal-hill.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = "canal-hill.obj"; path = "resources/canal-hill.obj"; sourceTree = "<group>"; };
+		94DE56CB2019A728004B1FBF /* Scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Scene.h; path = ../Scene.h; sourceTree = "<group>"; };
+		94DE56CC201E6629004B1FBF /* Raycaster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Raycaster.h; sourceTree = "<group>"; };
+		94DE56CD201E671B004B1FBF /* Raycaster.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Raycaster.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,17 +108,9 @@
 		94671FF91FCB7404004D5287 = {
 			isa = PBXGroup;
 			children = (
-				9429D0B22017066A005D3ABE /* SceneObject.h */,
-				9429D0B3201709C6005D3ABE /* SceneObject.cpp */,
+				94DE56C620199508004B1FBF /* canal-hill.obj */,
+				94DE56C420199501004B1FBF /* randomtest.txt */,
 				9429D0A020104AFC005D3ABE /* hello_world.bmp */,
-				946720121FCB9CBF004D5287 /* Camera.h */,
-				946720101FCB98ED004D5287 /* Surfel.h */,
-				946720111FCB9C16004D5287 /* Material.h */,
-				9467200C1FCB7538004D5287 /* Ray.h */,
-				9467200D1FCB7BA4004D5287 /* Vector.h */,
-				9429D0B02017040E005D3ABE /* Tri.h */,
-				9467200F1FCB958D004D5287 /* Light.h */,
-				9467200E1FCB9326004D5287 /* Color.h */,
 				946720041FCB7404004D5287 /* MaxFoleyRender */,
 				946720031FCB7404004D5287 /* Products */,
 				9429D09A200F2C2B005D3ABE /* Frameworks */,
@@ -127,6 +129,19 @@
 			isa = PBXGroup;
 			children = (
 				946720051FCB7404004D5287 /* main.cpp */,
+				9429D0B3201709C6005D3ABE /* SceneObject.cpp */,
+				946720121FCB9CBF004D5287 /* Camera.h */,
+				9467200E1FCB9326004D5287 /* Color.h */,
+				9467200F1FCB958D004D5287 /* Light.h */,
+				946720111FCB9C16004D5287 /* Material.h */,
+				9467200C1FCB7538004D5287 /* Ray.h */,
+				94DE56CC201E6629004B1FBF /* Raycaster.h */,
+				94DE56CD201E671B004B1FBF /* Raycaster.cpp */,
+				94DE56CB2019A728004B1FBF /* Scene.h */,
+				9429D0B22017066A005D3ABE /* SceneObject.h */,
+				946720101FCB98ED004D5287 /* Surfel.h */,
+				9429D0B02017040E005D3ABE /* Tri.h */,
+				9467200D1FCB7BA4004D5287 /* Vector.h */,
 			);
 			path = MaxFoleyRender;
 			sourceTree = "<group>";
@@ -190,6 +205,7 @@
 			files = (
 				946720061FCB7404004D5287 /* main.cpp in Sources */,
 				9429D0B4201709C6005D3ABE /* SceneObject.cpp in Sources */,
+				94DE56CE201E671B004B1FBF /* Raycaster.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

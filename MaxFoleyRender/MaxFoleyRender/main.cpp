@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include "Vector.h"
 #include "Color.h"
+#include "SceneObject.h"
 #include "SDL2/SDL.h"
 #include <pngwriter.h>
 
@@ -27,7 +28,6 @@ void writeImageToFile(MFR::Color * buf, char * filename, int width, int height)
 	{
      	png.plot(i%width,i/width, buf[i].r*255, buf[i].g*255, buf[i].b*255);
 	}
-     std::cout << " just making sure we actually did it " << std::endl;
    png.close();
 }
 
@@ -89,15 +89,12 @@ void writeColorBufferToTexture(SDL_Texture * tex, MFR::Color * buf)
 	
 	//copy over the pixel buffer
 	for(int i = 0; i < w*h; i++)
-	{
-		std::cout << i <<  sizeof(pixels[i]) << std::endl;
-		
+	{		
 		Uint32 color = 0;
 		Uint32 r = buf[i].r*255;
 		Uint32 g = buf[i].g*255;
 		Uint32 b = buf[i].b*255;
-		Uint32 a = buf[i].a*255;
-		color = (r << 24) + (g << 16) + (b << 8) + a;
+		color = (r << 24) + (g << 16) + (b << 8) + 255;
 		pixels[i] = color;
 	}
 	
@@ -106,7 +103,7 @@ void writeColorBufferToTexture(SDL_Texture * tex, MFR::Color * buf)
 }
 
 int main(int argc, const char * argv[]) {
-    printf("Hello, World!\n");
+    std::cout << "Hello, World!\n" << std::endl;
 
 	int width = 640;
 	int height = 480;
@@ -141,6 +138,9 @@ int main(int argc, const char * argv[]) {
 	
 	writeImageToFile(pixels, (char *)"test.png", width, height);
 	
+	
+	SDL_Texture * unusedTex = getImageTexture("hello_world.bmp", win, ren);
+
 	SDL_Texture * tex = getBlankTexture(win, ren);
 	writeColorBufferToTexture(tex,pixels);
 	
@@ -149,6 +149,11 @@ int main(int argc, const char * argv[]) {
 	
 	//Event handler
 	SDL_Event e;
+	
+	MFR::SceneObject canal = MFR::SceneObject("car-parsche-sport.obj");
+	std::cout << canal << std::endl;
+	std::vector<MFR::Material> ms = MFR::Material::getMaterialsFromFile("track-tire.mtl" );
+	std::cout << ms[0] << std::endl;
 	
 	while(!quit)
 	{
@@ -165,7 +170,7 @@ int main(int argc, const char * argv[]) {
 		//First clear the renderer
 		SDL_RenderClear(ren);
 		//Draw the texture
-		SDL_RenderCopy(ren, tex, NULL, NULL);
+		SDL_RenderCopy(ren, unusedTex, NULL, NULL);
 		//Update the screen
 		SDL_RenderPresent(ren);
 		//Take a quick break after all that hard work
@@ -191,6 +196,8 @@ And what format to use?
 	-- then just put lights and camera in manually in the code, do the rendering logic and figure out shit for that later
 
 Implement all the rendering logic 
+
+Figure out how to scale and rotate the objects
 
 Figure out how to do the memory stuff
 

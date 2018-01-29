@@ -13,7 +13,8 @@ namespace MFR {
 
 	class Tri {
 		public:
-			Point[3] points;
+			Point points[3];
+			std::shared_ptr<Material> material;
 			Tri(Point a, Point b, Point c)
 			{
 				points[0] = a;
@@ -28,7 +29,7 @@ namespace MFR {
 				points[2] = Point();
 			}
 	
-	}
+	};
 }
 
 #endif /* Tri_h */

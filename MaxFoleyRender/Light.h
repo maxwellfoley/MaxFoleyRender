@@ -9,20 +9,22 @@
 #ifndef Light_h
 #define Light_h
 
-//for now just point light
-enum MFR::LightType{Point};
+namespace MFR {
 
-class MFR::Light {
-	public:
-		MFR::Point origin;
-		float strength;
-		MFR::LightType type;
+	//for now just point light
+	enum LightType{PointLight};
+
+	class Light {
+		public:
+			Point origin;
+			float strength;
+			LightType type;
+			bool shadowsEnabled;
 	
-		MFR::Light(MFR::Point _origin, float _strength, MFR::LightType _type)
-		{
-			origin = _origin; strength = _strength; type = _type;
-		}
-
+			Light(Point _origin, float _strength, LightType _type)
+			{
+				origin = _origin; strength = _strength; type = _type;
+			}
+		};
 }
-
 #endif /* Light_h */

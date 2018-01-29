@@ -21,8 +21,10 @@ namespace MFR {
 		public:
 			std::vector<Tri> mesh;
 			Point origin;
-			std::map<std::string, Material> materials;
-			std::map<Material, std::vector<int>> materialIndexes;
+			Vector rotation;
+			Vector scale;
+			std::map<std::string, std::shared_ptr<Material>> materials;
+			std::map<std::shared_ptr<Material>, std::vector<int>> materialIndexes;
 		
 			SceneObject(std::string filename)
 			{
@@ -30,6 +32,10 @@ namespace MFR {
 			}
 		
 			void loadFromObjFile(std::string filename);
+		
+			friend std::ostream& operator<<(std::ostream &strm, const MFR::SceneObject &obj) {
+				return strm << "Object with " << obj.mesh.size() << " triangles";
+			}
 	};
 }
 

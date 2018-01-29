@@ -9,17 +9,22 @@
 #ifndef Surfel_h
 #define Surfel_h
 
-class MFR::Surfel {
-	public:
-		MFR::Point position;
-		MFR::Vector normal;
-		MFR::Material material;
-	
-		MFR::Surfel(MFR::Point _position, MFR::Vector _normal, MFR::Material _material)
-		{
-			position = _position; normal = _normal; material = _material;
-		}
+#include "Vector.h"
+#include "Material.h"
 
+namespace MFR {
+	class Surfel {
+		public:
+			Point position;
+			Vector normal;
+			Material material;
+	
+			Surfel(Point _position, Vector _normal, Material _material)
+			{
+				position = _position; normal = _normal; material = _material;
+			}
+
+	};
 }
 
 #endif /* Surfel_h */

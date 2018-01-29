@@ -22,17 +22,22 @@ void MFR::SceneObject::loadFromObjFile(std::string filename) {
 	
 	#include <fstream>
 	std::ifstream infile(filename);
+	if(!infile.is_open()){
+		//TODO: throw error here
+		std::cout << "Couldn't read the darn file" << std::endl;
+	}
 	
 	std::string line;
 	std::vector<Point> vertices;
-	Material currentMaterial = Material();
+	std::shared_ptr<Material> currentMaterial = std::make_shared<Material>();
 
 	while (std::getline(infile, line))
 	{
 		std::stringstream iss = std::stringstream(line);
 		std::string firstToken;
 		iss >> firstToken;
-		
+		std::cout << "first token " << firstToken << std::endl;
+
 		//v is for vertex, add these to an array of points
 		if(firstToken == "v") {
 			std::string a, b, c;
@@ -56,7 +61,9 @@ void MFR::SceneObject::loadFromObjFile(std::string filename) {
 			
 			//remove everything from the token which occurs after the first slash
 			for(int i = 0; i < 3; i++){
-				tokens[i] = tokens[i].substr(tokens[i].find("/"));
+				tokens[i] = tokens[i].substr(0,tokens[i].find("/"));
+								std::cout << "facetoken" << tokens[i] << std::endl;
+
 			}
 			
 			//now add the face information to the vector
@@ -71,11 +78,11 @@ void MFR::SceneObject::loadFromObjFile(std::string filename) {
 			//load the materials from the file and place them in the list
 			std::string filename;
 			iss >> filename;
-			std::vector<Material> mats = Material::getMaterialsFromFile(filename);
+			std::vector<std::shared_ptr<Material>> mats = Material::getMaterialsFromFile(filename);
 			
-			for(std::vector<Material>::iterator it = mats.begin(); it != mats.end(); ++it)
+			for(std::vector<std::shared_ptr<Material>>::iterator it = mats.begin(); it != mats.end(); ++it)
 			{
-				materials[(*it).name] = *it;
+				materials[(*it)->name] = *it;
 			}
 
 		}

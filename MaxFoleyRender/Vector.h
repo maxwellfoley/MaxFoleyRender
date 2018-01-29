@@ -43,6 +43,13 @@ namespace MFR {
 			}
 		
 		
+			//unary negation
+			Vector operator- ()
+			{
+				this->arma_Vector = -arma_Vector;
+				return *this;
+			}
+
 			//addition
 			Vector & operator+=(const Vector& rhs)
 			{
@@ -64,6 +71,23 @@ namespace MFR {
 			friend MFR::Vector operator-(MFR::Vector lhs, const MFR::Vector& rhs)
 			{
 				lhs -= rhs;
+				return lhs;
+			}
+		
+			//multiplication by scalar
+			Vector & operator*=(float f)
+			{
+				this->arma_Vector = this->arma_Vector * f;
+				return *this;
+			}
+			friend MFR::Vector operator*(const float rhs, MFR::Vector lhs)
+			{
+				lhs *= rhs;
+				return lhs;
+			}
+			friend MFR::Vector operator*(MFR::Vector lhs, const float rhs)
+			{
+				lhs *= rhs;
 				return lhs;
 			}
 		
@@ -129,6 +153,50 @@ namespace MFR {
 				return strm << "(" << v.arma_Vector(0) << ", " << v.arma_Vector(1) << ", "
 				 << v.arma_Vector(2) <<  ")";
 			}
+		
+			Vector & abs()
+			{
+				this->arma_Vector = arma::abs(this->arma_Vector);
+				return *this;
+			}
+		
+		
+			Vector translate(Vector translation)
+			{
+				Vector v = *this + translation;
+				return v;
+			}
+		
+			Vector & rotate(Vector rotation)
+			{
+				arma::fmat matX;
+				matX << 1.0 << 0.0 << 0.0
+				<< 0.0 << float(cos(rotation.x())) << float(-sin(rotation.x()))
+				<< 0.0 << float(sin(rotation.x())) << float(cos(rotation.x()));
+				
+				arma::fmat matY;
+				matY << float(cos(rotation.y())) << 0.0 << float(sin(rotation.y()))
+				<< 0.0 << 1.0 << 0.0
+				<< float(-sin(rotation.y())) << 0.0 << float(cos(rotation.y()));
+				
+				arma::fmat matZ;
+				matZ << float(cos(rotation.z())) << float(-sin(rotation.z())) << 0.0
+				<< float(sin(rotation.z())) << float(cos(rotation.z())) << 0.0
+				<< 0.0 << 0.0 << 1.0;
+				
+				Vector v = Vector(arma_Vector*matX*matY*matZ);
+				return v;
+			}
+		
+			Vector scale(Vector scale)
+			{
+				arma::fvec returnVal;
+				returnVal << arma_Vector(0) * scale.x() << arma_Vector(1) * scale.y() << arma_Vector(2) * scale.z();
+				Vector v = Vector(returnVal);
+				return v;
+			}
+
+
 	};
 
 	using Point = MFR::Vector;

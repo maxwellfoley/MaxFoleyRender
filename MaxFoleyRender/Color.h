@@ -34,6 +34,58 @@ namespace MFR {
 				r = _r; g = _g; b = _b;
 			}
 		
+			friend std::ostream& operator<<(std::ostream &strm, const MFR::Color &c) {
+				return strm << "(" << c.r << "," << c.g << ","<< c.b << ")";
+			}
+		
+			//addition
+			Color & operator+=(const Color& rhs)
+			{
+				this->r += rhs.r;
+				this->g += rhs.g;
+				this->b += rhs.b;
+				return *this;
+			}
+			friend MFR::Color operator+(MFR::Color lhs, const MFR::Color& rhs)
+			{
+				lhs += rhs;
+				return lhs;
+			}
+
+		
+			//multiplication
+			Color & operator*=(float f)
+			{
+				this->r = this->r*f;
+				this->g = this->g*f;
+				this->b = this->b*f;
+
+				return *this;
+			}
+			friend Color operator*(Color lhs, const float f)
+			{
+				lhs.r*=f;
+				lhs.g*=f;
+				lhs.b*=f;
+				return lhs;
+			}
+		
+			//division
+			Color & operator/=(float f)
+			{
+				this->r = this->r/f;
+				this->g = this->g/f;
+				this->b = this->b/f;
+
+				return *this;
+			}
+			friend Color operator/(Color lhs, const float f)
+			{
+				lhs.r/=f;
+				lhs.g/=f;
+				lhs.b/=f;
+				return lhs;
+			}
 
 	};
 }
