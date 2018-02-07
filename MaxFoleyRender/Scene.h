@@ -24,7 +24,7 @@ namespace MFR {
 
 	class Scene {
 		public:
-			std::vector<SceneObject> objects;
+			std::vector<std::shared_ptr<SceneObject>> objects;
 			std::vector<std::shared_ptr<Light>> lights;
 			std::shared_ptr<Camera> camera;
 			std::vector<std::shared_ptr<Material>> materials;
@@ -38,9 +38,9 @@ namespace MFR {
 				std::vector<Tri> returnData;
 				
 				//loop through all objects in the scene
-				for(std::vector<SceneObject>::iterator it = objects.begin(); it!=objects.end(); ++it)
+				for(std::vector<std::shared_ptr<SceneObject>>::iterator it = objects.begin(); it!=objects.end(); ++it)
 				{
-					std::vector<Tri> mesh = (*it).mesh;
+					std::vector<Tri> mesh = (*it)->mesh;
 					
 					/*
 					//unwind materialIndexes for this object so that we get array of triangle index to material
@@ -68,17 +68,18 @@ namespace MFR {
 					{
 						Tri t = *it2b;
 						
-						t.points[0].scale((*it).scale);
-						t.points[1].scale((*it).scale);
-						t.points[2].scale((*it).scale);
 
-						t.points[0].rotate((*it).rotation);
-						t.points[1].rotate((*it).rotation);
-						t.points[2].rotate((*it).rotation);
+						t.points[0].scale((*it)->scale);
+						t.points[1].scale((*it)->scale);
+						t.points[2].scale((*it)->scale);
 
-						t.points[0].translate((*it).position);
-						t.points[1].translate((*it).position);
-						t.points[2].translate((*it).position);
+						t.points[0].rotateInDegrees((*it)->rotation);
+						t.points[1].rotateInDegrees((*it)->rotation);
+						t.points[2].rotateInDegrees((*it)->rotation);
+
+						t.points[0].translate((*it)->position);
+						t.points[1].translate((*it)->position);
+						t.points[2].translate((*it)->position);
 
 						returnData.push_back(t);
 						

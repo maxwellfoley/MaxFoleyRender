@@ -29,6 +29,10 @@ namespace MFR {
 				points[2] = Point();
 			}
 	
+			friend std::ostream& operator<<(std::ostream &strm, const MFR::Tri &tri) {
+				return strm << "Triangle with points " << tri.points[0] << " " << tri.points[1]
+				<< " " << tri.points[2];
+			}
 	};
 }
 

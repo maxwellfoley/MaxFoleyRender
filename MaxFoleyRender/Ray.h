@@ -21,6 +21,10 @@ namespace MFR {
 				origin = o;
 				direction = dir;
 			}
+			friend std::ostream& operator<<(std::ostream &strm, const MFR::Ray &ray) {
+				return strm << "Ray with position " << ray.origin << " and direction" << ray.direction;
+			}
+		
 	};
 }
 #endif /* Ray_h */

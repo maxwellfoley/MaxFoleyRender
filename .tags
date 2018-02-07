@@ -46,7 +46,8 @@ SceneObject	MaxFoleyRender/SceneObject.h	/^			SceneObject(std::string filename)$
 SceneObject	MaxFoleyRender/SceneObject.h	/^	class SceneObject {$/;"	c	namespace:MFR
 SceneObject_h	MaxFoleyRender/SceneObject.h	/^#define SceneObject_h$/;"	d
 Scene_h	MaxFoleyRender/Scene.h	/^#define Scene_h$/;"	d
-Surfel	MaxFoleyRender/Surfel.h	/^			Surfel(Point _position, Vector _normal, Material _material)$/;"	f	class:MFR::Surfel
+Surfel	MaxFoleyRender/Surfel.h	/^			Surfel()$/;"	f	class:MFR::Surfel
+Surfel	MaxFoleyRender/Surfel.h	/^			Surfel(Point _position, Vector _normal, std::shared_ptr<Material> _material)$/;"	f	class:MFR::Surfel
 Surfel	MaxFoleyRender/Surfel.h	/^	class Surfel {$/;"	c	namespace:MFR
 Surfel_h	MaxFoleyRender/Surfel.h	/^#define Surfel_h$/;"	d
 Tri	MaxFoleyRender/Tri.h	/^			Tri()$/;"	f	class:MFR::Tri
@@ -62,9 +63,11 @@ abs	MaxFoleyRender/Vector.h	/^			Vector & abs()$/;"	f	class:MFR::Vector
 ambient	MaxFoleyRender/Material.h	/^			Color ambient;$/;"	m	class:MFR::Material
 arma_Vector	MaxFoleyRender/Vector.h	/^			arma::fvec arma_Vector;$/;"	m	class:MFR::Vector
 b	MaxFoleyRender/Color.h	/^			float b;$/;"	m	class:MFR::Color
+biradiance	MaxFoleyRender/Light.h	/^			float biradiance(Point p)$/;"	f	class:MFR::Light
 blinnPhong	MaxFoleyRender/Material.h	/^	enum IllumMode {flat, lambert, blinnPhong};$/;"	e	enum:MFR::IllumMode
 calculateImage	MaxFoleyRender/MaxFoleyRender/main.cpp	/^void calculateImage(MFR::Color * buf, int width, int height)$/;"	f
 camera	MaxFoleyRender/Scene.h	/^			std::shared_ptr<Camera> camera;$/;"	m	class:MFR::Scene
+color	MaxFoleyRender/Light.h	/^			Color color;$/;"	m	class:MFR::Light
 cross	MaxFoleyRender/Vector.h	/^			Vector cross(const Vector & rhs)$/;"	f	class:MFR::Vector
 diffuse	MaxFoleyRender/Material.h	/^			Color diffuse;$/;"	m	class:MFR::Material
 direction	MaxFoleyRender/Ray.h	/^        	Vector direction;$/;"	m	class:MFR::Ray
@@ -76,15 +79,15 @@ g	MaxFoleyRender/Color.h	/^			float g;$/;"	m	class:MFR::Color
 getBlankTexture	MaxFoleyRender/MaxFoleyRender/main.cpp	/^SDL_Texture * getBlankTexture(SDL_Window * win, SDL_Renderer * ren)$/;"	f
 getImageTexture	MaxFoleyRender/MaxFoleyRender/main.cpp	/^SDL_Texture * getImageTexture(char * filename, SDL_Window * win, SDL_Renderer * ren)$/;"	f
 getMaterialsFromFile	MaxFoleyRender/Material.h	/^			static std::vector<std::shared_ptr<Material>> getMaterialsFromFile(std::string filename)$/;"	f	class:MFR::Material
+hemiRandom	MaxFoleyRender/Vector.h	/^			static Vector hemiRandom(Vector v)$/;"	f	class:MFR::Vector
 illumMode	MaxFoleyRender/Material.h	/^			IllumMode illumMode;$/;"	m	class:MFR::Material
 lambert	MaxFoleyRender/Material.h	/^	enum IllumMode {flat, lambert, blinnPhong};$/;"	e	enum:MFR::IllumMode
 length	MaxFoleyRender/Vector.h	/^			float length() {$/;"	f	class:MFR::Vector
 lights	MaxFoleyRender/Scene.h	/^			std::vector<std::shared_ptr<Light>> lights;$/;"	m	class:MFR::Scene
 loadFromObjFile	MaxFoleyRender/SceneObject.cpp	/^void MFR::SceneObject::loadFromObjFile(std::string filename) {$/;"	f	class:MFR::SceneObject
 main	MaxFoleyRender/MaxFoleyRender/main.cpp	/^int main(int argc, const char * argv[]) {$/;"	f
-material	MaxFoleyRender/Surfel.h	/^			Material material;$/;"	m	class:MFR::Surfel
+material	MaxFoleyRender/Surfel.h	/^			std::shared_ptr<Material> material;$/;"	m	class:MFR::Surfel
 material	MaxFoleyRender/Tri.h	/^			std::shared_ptr<Material> material;$/;"	m	class:MFR::Tri
-materialIndexes	MaxFoleyRender/SceneObject.h	/^			std::map<std::shared_ptr<Material>, std::vector<int>> materialIndexes;$/;"	m	class:MFR::SceneObject
 materials	MaxFoleyRender/Scene.h	/^			std::vector<std::shared_ptr<Material>> materials;$/;"	m	class:MFR::Scene
 materials	MaxFoleyRender/SceneObject.h	/^			std::map<std::string, std::shared_ptr<Material>> materials;$/;"	m	class:MFR::SceneObject
 mesh	MaxFoleyRender/SceneObject.h	/^			std::vector<Tri> mesh;$/;"	m	class:MFR::SceneObject
@@ -116,13 +119,13 @@ operator <<	MaxFoleyRender/SceneObject.h	/^			friend std::ostream& operator<<(st
 operator <<	MaxFoleyRender/Vector.h	/^			friend std::ostream& operator<<(std::ostream &strm, const MFR::Vector &v) {$/;"	f	class:MFR::Vector
 origin	MaxFoleyRender/Light.h	/^			Point origin;$/;"	m	class:MFR::Light
 origin	MaxFoleyRender/Ray.h	/^        	Point origin;$/;"	m	class:MFR::Ray
-origin	MaxFoleyRender/SceneObject.h	/^			Point origin;$/;"	m	class:MFR::SceneObject
 points	MaxFoleyRender/Tri.h	/^			Point points[3];$/;"	m	class:MFR::Tri
 poseMesh	MaxFoleyRender/Scene.h	/^			std::vector<Tri> poseMesh()$/;"	f	class:MFR::Scene
 position	MaxFoleyRender/Camera.h	/^			Point position;$/;"	m	class:MFR::Camera
+position	MaxFoleyRender/SceneObject.h	/^			Point position;$/;"	m	class:MFR::SceneObject
 position	MaxFoleyRender/Surfel.h	/^			Point position;$/;"	m	class:MFR::Surfel
 r	MaxFoleyRender/Color.h	/^			float r;$/;"	m	class:MFR::Color
-rotate	MaxFoleyRender/Vector.h	/^			Vector & rotate(Vector rotation)$/;"	f	class:MFR::Vector
+rotate	MaxFoleyRender/Vector.h	/^			Vector rotate(Vector rotation)$/;"	f	class:MFR::Vector
 rotation	MaxFoleyRender/Camera.h	/^			Point rotation;$/;"	m	class:MFR::Camera
 rotation	MaxFoleyRender/SceneObject.h	/^			Vector rotation;$/;"	m	class:MFR::SceneObject
 scale	MaxFoleyRender/SceneObject.h	/^			Vector scale;$/;"	m	class:MFR::SceneObject

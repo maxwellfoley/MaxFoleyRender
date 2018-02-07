@@ -11,13 +11,14 @@
 
 using namespace MFR;
 
-void Raycaster::RenderImage(std::shared_ptr<Camera> camera, std::shared_ptr<Scene> scene, Color * pixels, int width, int height, int indirectRays)
+void Raycaster::RenderImage(std::shared_ptr<Scene> scene, Color * pixels, int width, int height, int indirectRays)
 {
 		for(int j = 0; j < height; j++)
 		{
 			for(int i = 0; i < width; i++)
 			{	
-				Color color = GetPixelColor(camera, scene, i, j, width, height, indirectRays);
+				Color color = GetPixelColor(scene->camera, scene, i, j, width, height, indirectRays);
+				std::cout << i << " " << j << " " << color << std::endl;
 				pixels[j*width +i] = color;
 			}
 		}
@@ -57,7 +58,7 @@ Color Raycaster::GetPixelColor(std::shared_ptr<Camera> camera, std::shared_ptr<S
 		for(int i = 0; i < lights.size(); i++)
 		{
 				// multiply by dot product of light ray and normal
-				Vector pos = lights[i]->origin;
+				Vector pos = lights[i]->position;
 				Vector lightDir = pos - surfel->position;
 				lightDir = lightDir.unit();
 				
@@ -122,7 +123,8 @@ std::shared_ptr<Surfel> Raycaster::CastSingleRay(std::shared_ptr<Scene> scene, R
 
 	Point P = ray.origin;
 	Vector w = ray.direction;
-
+	
+	//std::cout << ray << std::endl;
 
 	//find the closest triangle in the scene
 	bool foundHit = false;
@@ -133,6 +135,7 @@ std::shared_ptr<Surfel> Raycaster::CastSingleRay(std::shared_ptr<Scene> scene, R
 	//loop through triangles and check for hits
 	for(int i = 0; i < tt.size() ; i++)
 	{
+		//std::cout << tt[i] << std::endl;
 		float b [3];
 		float t = 10000000;
 		//MY VERSION
@@ -146,7 +149,6 @@ std::shared_ptr<Surfel> Raycaster::CastSingleRay(std::shared_ptr<Scene> scene, R
 	//if it hit something
 	if(minI > -1)
 	{
-
 			float distance = minT;
 
 			Vector normal = ((tt[minI].points[1] - tt[minI].points[0]).cross(tt[minI].points[2] - tt[minI].points[1])).unit();
@@ -178,7 +180,16 @@ bool Raycaster::IntersectTriangle(Ray ray, Tri t, float b[3], float& dist)
 	 float a = e_1.dot(q);
 
 	// Backfacing / nearly parallel, or close to the limit of precision?
- 	if ((n.dot(w) >= 0) || (std::abs(a) <= .0000001)) return false;
+ 	if (n.dot(w) >= 0)
+	{
+		return false;
+	}
+	if(std::abs(a) <= .0000001)
+	{
+		//std::cout << "e1" << e_1 << "e2" << e_2 << "q" << q <<std::endl;
+		return false;
+	}
+	
 	
 	 Vector s = (P - t.points[0]) / a;
 	 Vector r = s.cross(e_1);
@@ -188,9 +199,12 @@ bool Raycaster::IntersectTriangle(Ray ray, Tri t, float b[3], float& dist)
 	b[2] = 1.0f - b[0] - b[1];
 
 	// Intersected outside triangle?
-	if ((b[0] < 0.0f) || (b[1] < 0.0f) || (b[2] < 0.0f)) return false;
+	if ((b[0] < 0.0f) || (b[1] < 0.0f) || (b[2] < 0.0f))
+	{
+		return false;
+	}
 
-  dist = e_2.dot(r);
+  	dist = e_2.dot(r);
 	return (dist >= 0.0f);
 }
 

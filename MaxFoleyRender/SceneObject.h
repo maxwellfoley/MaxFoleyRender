@@ -33,6 +33,14 @@ namespace MFR {
 		
 			void loadFromObjFile(std::string filename);
 		
+			void setMaterialOnAll(std::shared_ptr<Material> material)
+			{
+				for(std::vector<Tri>::iterator it = mesh.begin(); it != mesh.end(); ++it)
+				{
+					(*it).material = material;
+				}
+			}
+		
 			friend std::ostream& operator<<(std::ostream &strm, const MFR::SceneObject &obj) {
 				return strm << "Object with " << obj.mesh.size() << " triangles";
 			}

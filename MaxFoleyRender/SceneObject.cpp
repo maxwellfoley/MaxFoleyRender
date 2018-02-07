@@ -36,8 +36,7 @@ void MFR::SceneObject::loadFromObjFile(std::string filename) {
 		std::stringstream iss = std::stringstream(line);
 		std::string firstToken;
 		iss >> firstToken;
-		std::cout << "first token " << firstToken << std::endl;
-
+ 
 		//v is for vertex, add these to an array of points
 		if(firstToken == "v") {
 			std::string a, b, c;
@@ -62,14 +61,27 @@ void MFR::SceneObject::loadFromObjFile(std::string filename) {
 			//remove everything from the token which occurs after the first slash
 			for(int i = 0; i < 3; i++){
 				tokens[i] = tokens[i].substr(0,tokens[i].find("/"));
-								std::cout << "facetoken" << tokens[i] << std::endl;
-
 			}
 			
 			//now add the face information to the vector
-			Tri tri = Tri(vertices[std::stoi(tokens[0])],
-				vertices[std::stoi(tokens[1])],
-				vertices[std::stoi(tokens[2])]);
+			
+			//this is a pain in the ass but an index can be negative, which means you count backwards, gotta account for that
+			Point triPoints[3];
+			
+			for(int jj = 0; jj < 3; jj++)
+			{
+				int index = std::stoi(tokens[jj]);
+				if(index < 0)
+				{
+					triPoints[jj] = vertices[vertices.size()+index];
+				}
+				else
+				{
+					triPoints[jj] = vertices[index];
+				}
+			}
+			
+			Tri tri = Tri(triPoints[0],triPoints[1], triPoints[2]);
 			
 			//add link to the material
 			tri.material = currentMaterial;

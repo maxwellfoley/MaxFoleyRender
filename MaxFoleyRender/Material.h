@@ -37,6 +37,17 @@ namespace MFR
 				illumMode = lambert;
 			}
 		
+			//constructor with lambertian
+			Material(MFR::Color diffuseColor)
+			{
+				name = "default";
+				ambient = Color(0.0,0.0,0.0);
+				diffuse = diffuseColor;
+				specular = Color(1.0,1.0,1.0);
+				specularExponent = 1.0;
+				illumMode = lambert;
+			}
+		
 			friend bool operator< (const Material& a, const Material& b){
 				return a.name < b.name;
 			}

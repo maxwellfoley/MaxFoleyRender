@@ -163,37 +163,64 @@ namespace MFR {
 		
 			Vector translate(Vector translation)
 			{
-				Vector v = *this + translation;
-				return v;
+				*this += translation;
+				return *this;
+			}
+		
+			Vector rotateInDegrees(Vector rotation)
+			{
+				Vector radianRotation = Vector(rotation.x() * 3.14159265359 / 180, rotation.y() * 3.14159265359 / 180, rotation.z() * 3.14159265359 / 180);
+
+				return rotate(radianRotation);
 			}
 		
 			Vector rotate(Vector rotation)
 			{
-				arma::fmat matX;
-				matX << 1.0 << 0.0 << 0.0
-				<< 0.0 << float(cos(rotation.x())) << float(-sin(rotation.x()))
-				<< 0.0 << float(sin(rotation.x())) << float(cos(rotation.x()));
+				//std::cout << "THIS" << *this << std::endl;
+				//std::cout << "ROT" << rotation << std::endl;
+
+				arma::fmat matX = arma::zeros<arma::fmat>(3,3);
+				matX << 1.0 << 0.0 << 0.0 << arma::endr
+				<< 0.0 << float(cos(rotation.x())) << float(sin(rotation.x())) << arma::endr
+				<< 0.0 << float(-sin(rotation.x())) << float(cos(rotation.x())) << arma::endr;
 				
-				arma::fmat matY;
-				matY << float(cos(rotation.y())) << 0.0 << float(sin(rotation.y()))
-				<< 0.0 << 1.0 << 0.0
-				<< float(-sin(rotation.y())) << 0.0 << float(cos(rotation.y()));
+				arma::fmat matY = arma::zeros<arma::fmat>(3,3);
+				matY << float(cos(rotation.y())) << 0.0 << float(-sin(rotation.y())) << arma::endr
+				<< 0.0 << 1.0 << 0.0 << arma::endr
+				<< float(sin(rotation.y())) << 0.0 << float(cos(rotation.y())) << arma::endr;
 				
-				arma::fmat matZ;
-				matZ << float(cos(rotation.z())) << float(-sin(rotation.z())) << 0.0
-				<< float(sin(rotation.z())) << float(cos(rotation.z())) << 0.0
-				<< 0.0 << 0.0 << 1.0;
+				arma::fmat matZ = arma::zeros<arma::fmat>(3,3);
+				matZ << float(cos(rotation.z())) << float(sin(rotation.z())) << 0.0 << arma::endr
+				<< float(-sin(rotation.z())) << float(cos(rotation.z())) << 0.0 << arma::endr
+				<< 0.0 << 0.0 << 1.0 << arma::endr;
 				
-				Vector v = Vector(arma_Vector*matX*matY*matZ);
-				return v;
+				arma::frowvec row = arma::frowvec(3);
+				row << arma_Vector(0) << arma_Vector(1) << arma_Vector(2);
+				row.resize(1,3);/*
+				std::cout << "ROW" << row << std::endl;
+
+				std::cout << "XMAT" << matX << std::endl;
+				std::cout << "YMAT" << matY << std::endl;
+				std::cout << "ZMAT" << matZ << std::endl;
+*/
+				
+				arma::frowvec mathResult = row*matX*matY*matZ;
+				arma::fvec newVec;
+				newVec << mathResult(0) << mathResult(1) << mathResult(2);
+				
+				//TODO: matrixes are right, but output is wrong
+				//std::cout << "RESULT" << newVec << std::endl;
+
+				(*this).arma_Vector = newVec;
+				return *this;
 			}
 		
 			Vector scale(Vector scale)
 			{
 				arma::fvec returnVal;
-				returnVal << arma_Vector(0) * scale.x() << arma_Vector(1) * scale.y() << arma_Vector(2) * scale.z();
-				Vector v = Vector(returnVal);
-				return v;
+				returnVal << (arma_Vector(0) * scale.x()) << (arma_Vector(1) * scale.y()) << (arma_Vector(2) * scale.z());
+				(*this).arma_Vector = returnVal;
+				return *this;
 			}
 		
 			static Vector hemiRandom(Vector v)

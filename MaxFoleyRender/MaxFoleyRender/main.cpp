@@ -7,11 +7,91 @@
 //
 
 #include <stdio.h>
+#include <algorithm>
+
 #include "Vector.h"
 #include "Color.h"
+#include "Raycaster.h"
+#include "Scene.h"
 #include "SceneObject.h"
 #include "SDL2/SDL.h"
 #include <pngwriter.h>
+
+std::shared_ptr<MFR::Scene> makeCornellBoxScene() {
+	std::shared_ptr<MFR::Scene> scene = std::make_shared<MFR::Scene>();
+	
+	//left wall is red
+	std::shared_ptr<MFR::Material> redMaterial = std::make_shared<MFR::Material>(MFR::Color(1.0,0.0,0.0));
+	std::shared_ptr<MFR::SceneObject> leftWall = std::make_shared<MFR::SceneObject>("cube.obj");
+	leftWall->setMaterialOnAll(redMaterial);
+	leftWall->scale = MFR::Point(0.2,10.0,10.0);
+	leftWall->position = MFR::Point(-5.0,0.0,0.0);
+	leftWall->rotation = MFR::Point(0.0,90.0,0.0);
+	scene->objects.push_back(leftWall);
+
+	
+	//right wall is green
+	std::shared_ptr<MFR::Material> greenMaterial = std::make_shared<MFR::Material>(MFR::Color(0.0,1.0,0.0));
+	std::shared_ptr<MFR::SceneObject> rightWall = std::make_shared<MFR::SceneObject>("cube.obj");
+	rightWall->setMaterialOnAll(greenMaterial);
+	rightWall->scale = MFR::Point(0.2,10.0,10.0);
+	rightWall->position = MFR::Point(5.0,0.0,0.0);
+	rightWall->rotation = MFR::Point(0.0,90.0,0.0);
+	scene->objects.push_back(rightWall);
+	
+	//top wall
+	std::shared_ptr<MFR::Material> whiteMaterial = std::make_shared<MFR::Material>(MFR::Color(1.0,1.0,1.0));
+	std::shared_ptr<MFR::SceneObject> topWall = std::make_shared<MFR::SceneObject>("cube.obj");
+	topWall->setMaterialOnAll(whiteMaterial);
+	topWall->scale = MFR::Point(0.2,10.0,10.0);
+	topWall->position = MFR::Point(0.0,5.0,0.0);
+	topWall->rotation = MFR::Point(0.0,0.0,90.0);
+	scene->objects.push_back(topWall);
+	
+	//bottom wall aka floor
+	std::shared_ptr<MFR::SceneObject> bottomWall = std::make_shared<MFR::SceneObject>("cube.obj");
+	bottomWall->setMaterialOnAll(whiteMaterial);
+	bottomWall->scale = MFR::Point(0.2,10.0,10.0);
+	bottomWall->position = MFR::Point(0.0,-5.0,0.0);
+	bottomWall->rotation = MFR::Point(0.0,0.0,90.0);
+	scene->objects.push_back(bottomWall);
+
+	//back wall
+	std::shared_ptr<MFR::SceneObject> backWall = std::make_shared<MFR::SceneObject>("cube.obj");
+	backWall->setMaterialOnAll(whiteMaterial);
+	backWall->scale = MFR::Point(0.2,10.0,10.0);
+	backWall->position = MFR::Point(0.0,0.0,-5.0);
+	backWall->rotation = MFR::Point(0.0,0.0,90.0);
+	scene->objects.push_back(backWall);
+	
+	//front cube
+	std::shared_ptr<MFR::SceneObject> frontCube = std::make_shared<MFR::SceneObject>("cube.obj");
+	frontCube->setMaterialOnAll(whiteMaterial);
+	frontCube->scale = MFR::Point(2.0,2.0,2.0);
+	frontCube->position = MFR::Point(.2,-4.0,.2);
+	frontCube->rotation = MFR::Point(30.0,0.0,0.0);
+	scene->objects.push_back(frontCube);
+	
+	//back cube
+	std::shared_ptr<MFR::SceneObject> backCube = std::make_shared<MFR::SceneObject>("cube.obj");
+	backCube->setMaterialOnAll(whiteMaterial);
+	backCube->scale = MFR::Point(2.0,4.0,1.0);
+	backCube->position = MFR::Point(-2.0,-3.0,-2.0);
+	backCube->scale = MFR::Point(16.0,0.0,0.0);
+	scene->objects.push_back(backCube);
+	
+	std::shared_ptr<MFR::Camera> camera = std::make_shared<MFR::Camera>();
+	camera->position = MFR::Point(0,1,6);
+	camera->focalLength = -0.1;
+	camera->fov = .436332;
+	scene->camera = camera;
+	
+	std::shared_ptr<MFR::Light> light = std::make_shared<MFR::Light>();
+	light->position = MFR::Point(0,5.0,0);
+	scene->lights.push_back(light);
+	
+	return scene;
+}
 
 void calculateImage(MFR::Color * buf, int width, int height)
 {
@@ -26,7 +106,7 @@ void writeImageToFile(MFR::Color * buf, char * filename, int width, int height)
    pngwriter png(width,height,0,filename);
    for(int i = 0; i < width*height; i++)
 	{
-     	png.plot(i%width,i/width, buf[i].r*255, buf[i].g*255, buf[i].b*255);
+     	png.plot(i%width,i/width, buf[i].r, buf[i].g, buf[i].b);
 	}
    png.close();
 }
@@ -54,11 +134,11 @@ SDL_Texture * getImageTexture(char * filename, SDL_Window * win, SDL_Renderer * 
 	return tex;
 }
 
-SDL_Texture * getBlankTexture(SDL_Window * win, SDL_Renderer * ren)
+SDL_Texture * getBlankTexture(SDL_Window * win, SDL_Renderer * ren, int width, int height)
 {
 
  	//The final texture
-	SDL_Texture* tex = SDL_CreateTexture(ren, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, 640, 480);
+	SDL_Texture* tex = SDL_CreateTexture(ren, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, width, height);
 
 	if (tex == nullptr){
 		SDL_DestroyRenderer(ren);
@@ -70,8 +150,15 @@ SDL_Texture * getBlankTexture(SDL_Window * win, SDL_Renderer * ren)
 	return tex;
 }
 
+int clamp(int v, int lo, int hi)
+{
+	if(v<lo) return lo;
+	if(v>hi) return hi;
+	return v;
+}
 void writeColorBufferToTexture(SDL_Texture * tex, MFR::Color * buf)
 {
+
 	Uint32* pixels = nullptr;
 	int pitch = 0;
 	Uint32 format;
@@ -87,15 +174,25 @@ void writeColorBufferToTexture(SDL_Texture * tex, MFR::Color * buf)
 		std::cout << "Locking texture failed: " << SDL_GetError() << std::endl;
 	}
 	
+	MFR::Color * ptr = buf;
 	//copy over the pixel buffer
 	for(int i = 0; i < w*h; i++)
-	{		
+	{
+		//std::cout << "buf i " << *ptr << std::endl;
 		Uint32 color = 0;
-		Uint32 r = buf[i].r*255;
-		Uint32 g = buf[i].g*255;
-		Uint32 b = buf[i].b*255;
+		/*
+		Uint32 r = clamp(buf[i].r,0,1)*255;
+		Uint32 g = clamp(buf[i].g,0,1)*255;
+		Uint32 b = clamp(buf[i].b,0,1)*255;*/
+		Uint32 r = ptr->r*255;
+		Uint32 g = ptr->g*255;
+		Uint32 b = ptr->b*255;
+		
 		color = (r << 24) + (g << 16) + (b << 8) + 255;
-		pixels[i] = color;
+		//color = (255 << 24) + (0 << 16) + (255 << 8) + 255;
+
+		pixels[i] =color;
+		ptr++;
 	}
 	
 	SDL_UnlockTexture(tex);
@@ -105,8 +202,8 @@ void writeColorBufferToTexture(SDL_Texture * tex, MFR::Color * buf)
 int main(int argc, const char * argv[]) {
     std::cout << "Hello, World!\n" << std::endl;
 
-	int width = 640;
-	int height = 480;
+	int width = 60;
+	int height = 60;
 
 	/* RENDER IMAGE TO SCREEN */
 	
@@ -132,28 +229,34 @@ int main(int argc, const char * argv[]) {
 		return 1;
 	}
 	
+	//initialize scene
+	std::shared_ptr<MFR::Scene> cornellBox = makeCornellBoxScene();
+	
 	//initialize pixel buffer
 	MFR::Color * pixels = new MFR::Color[width*height];
-	calculateImage(pixels, width, height);
+//	calculateImage(pixels, width, height);
+	MFR::Raycaster::RenderImage(cornellBox, pixels, width, height, 0);
 	
+	for(int i = 0; i < width*height; i++)
+	{
+		std::cout << "pixels i " << pixels[i] << std::endl;
+	}
+	
+	SDL_Texture * tex = getBlankTexture(win, ren, width, height);
+	writeColorBufferToTexture(tex,pixels);
+
 	writeImageToFile(pixels, (char *)"test.png", width, height);
 	
 	
-	SDL_Texture * unusedTex = getImageTexture("hello_world.bmp", win, ren);
+	
+	//SDL_Texture * unusedTex = getImageTexture("hello_world.bmp", win, ren);
 
-	SDL_Texture * tex = getBlankTexture(win, ren);
-	writeColorBufferToTexture(tex,pixels);
 	
 	//Main loop flag
 	bool quit = false;
 	
 	//Event handler
 	SDL_Event e;
-	
-	MFR::SceneObject canal = MFR::SceneObject("car-parsche-sport.obj");
-	std::cout << canal << std::endl;
-	std::vector<std::shared_ptr<MFR::Material>> ms = MFR::Material::getMaterialsFromFile("track-tire.mtl" );
-	std::cout << (*ms[0]) << std::endl;
 	
 	while(!quit)
 	{
@@ -170,13 +273,16 @@ int main(int argc, const char * argv[]) {
 		//First clear the renderer
 		SDL_RenderClear(ren);
 		//Draw the texture
-		SDL_RenderCopy(ren, unusedTex, NULL, NULL);
+		SDL_RenderCopy(ren, tex, NULL, NULL);
 		//Update the screen
 		SDL_RenderPresent(ren);
 		//Take a quick break after all that hard work
 		SDL_Delay(1000);
 		
 	}
+	
+	delete pixels;
+	
 	SDL_DestroyTexture(tex);
 	SDL_DestroyRenderer(ren);
 	SDL_DestroyWindow(win);
