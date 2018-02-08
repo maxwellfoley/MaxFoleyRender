@@ -17,28 +17,53 @@
 #include "SDL2/SDL.h"
 #include <pngwriter.h>
 
+std::shared_ptr<MFR::Scene> makeSingleCubeScene() {
+	std::shared_ptr<MFR::Scene> scene = std::make_shared<MFR::Scene>();
+
+	std::shared_ptr<MFR::Material> whiteMaterial = std::make_shared<MFR::Material>(MFR::Color(1.0,1.0,1.0));
+	std::shared_ptr<MFR::SceneObject> cube = std::make_shared<MFR::SceneObject>("cube.obj");
+	cube->setMaterialOnAll(whiteMaterial);
+	cube->scale = MFR::Point(1.0,1.0,1.0);
+	cube->position = MFR::Point(0.0,0.0,-5.0);
+	cube->rotation = MFR::Point(0,0,0);
+	scene->objects.push_back(cube);
+	
+	std::shared_ptr<MFR::Camera> camera = std::make_shared<MFR::Camera>();
+	camera->position = MFR::Point(0,0,10);
+	camera->focalLength = -0.1;
+	camera->fov = .436332;
+	scene->camera = camera;
+	
+	std::shared_ptr<MFR::Light> light = std::make_shared<MFR::Light>();
+	light->position = MFR::Point(0,5.0,0);
+	scene->lights.push_back(light);
+
+	return scene;
+
+}
 std::shared_ptr<MFR::Scene> makeCornellBoxScene() {
 	std::shared_ptr<MFR::Scene> scene = std::make_shared<MFR::Scene>();
 	
-	//left wall is red
+		std::shared_ptr<MFR::Material> greenMaterial = std::make_shared<MFR::Material>(MFR::Color(0.0,1.0,0.0));
 	std::shared_ptr<MFR::Material> redMaterial = std::make_shared<MFR::Material>(MFR::Color(1.0,0.0,0.0));
+
+	
+	//left wall is red
 	std::shared_ptr<MFR::SceneObject> leftWall = std::make_shared<MFR::SceneObject>("cube.obj");
 	leftWall->setMaterialOnAll(redMaterial);
 	leftWall->scale = MFR::Point(0.2,10.0,10.0);
 	leftWall->position = MFR::Point(-5.0,0.0,0.0);
-	leftWall->rotation = MFR::Point(0.0,90.0,0.0);
+	leftWall->rotation = MFR::Point(90.0,0.0,0.0);
 	scene->objects.push_back(leftWall);
 
-	
 	//right wall is green
-	std::shared_ptr<MFR::Material> greenMaterial = std::make_shared<MFR::Material>(MFR::Color(0.0,1.0,0.0));
 	std::shared_ptr<MFR::SceneObject> rightWall = std::make_shared<MFR::SceneObject>("cube.obj");
 	rightWall->setMaterialOnAll(greenMaterial);
 	rightWall->scale = MFR::Point(0.2,10.0,10.0);
 	rightWall->position = MFR::Point(5.0,0.0,0.0);
-	rightWall->rotation = MFR::Point(0.0,90.0,0.0);
+	rightWall->rotation = MFR::Point(90.0,0.0,0.0);
 	scene->objects.push_back(rightWall);
-	
+
 	//top wall
 	std::shared_ptr<MFR::Material> whiteMaterial = std::make_shared<MFR::Material>(MFR::Color(1.0,1.0,1.0));
 	std::shared_ptr<MFR::SceneObject> topWall = std::make_shared<MFR::SceneObject>("cube.obj");
@@ -61,27 +86,27 @@ std::shared_ptr<MFR::Scene> makeCornellBoxScene() {
 	backWall->setMaterialOnAll(whiteMaterial);
 	backWall->scale = MFR::Point(0.2,10.0,10.0);
 	backWall->position = MFR::Point(0.0,0.0,-5.0);
-	backWall->rotation = MFR::Point(0.0,0.0,90.0);
+	backWall->rotation = MFR::Point(0.0,90.0,0.0);
 	scene->objects.push_back(backWall);
 	
 	//front cube
 	std::shared_ptr<MFR::SceneObject> frontCube = std::make_shared<MFR::SceneObject>("cube.obj");
-	frontCube->setMaterialOnAll(whiteMaterial);
+	frontCube->setMaterialOnAll(greenMaterial);
 	frontCube->scale = MFR::Point(2.0,2.0,2.0);
 	frontCube->position = MFR::Point(.2,-4.0,.2);
-	frontCube->rotation = MFR::Point(30.0,0.0,0.0);
+	frontCube->rotation = MFR::Point(0.0,30.0,0.0);
 	scene->objects.push_back(frontCube);
 	
 	//back cube
 	std::shared_ptr<MFR::SceneObject> backCube = std::make_shared<MFR::SceneObject>("cube.obj");
-	backCube->setMaterialOnAll(whiteMaterial);
+	backCube->setMaterialOnAll(redMaterial);
 	backCube->scale = MFR::Point(2.0,4.0,1.0);
 	backCube->position = MFR::Point(-2.0,-3.0,-2.0);
-	backCube->scale = MFR::Point(16.0,0.0,0.0);
+	backCube->rotation = MFR::Point(0.0,16.0,0.0);
 	scene->objects.push_back(backCube);
 	
 	std::shared_ptr<MFR::Camera> camera = std::make_shared<MFR::Camera>();
-	camera->position = MFR::Point(0,1,6);
+	camera->position = MFR::Point(0,0,25);
 	camera->focalLength = -0.1;
 	camera->fov = .436332;
 	scene->camera = camera;
@@ -106,7 +131,7 @@ void writeImageToFile(MFR::Color * buf, char * filename, int width, int height)
    pngwriter png(width,height,0,filename);
    for(int i = 0; i < width*height; i++)
 	{
-     	png.plot(i%width,i/width, buf[i].r, buf[i].g, buf[i].b);
+     	png.plot(i%width,height-i/width, buf[i].r, buf[i].g, buf[i].b);
 	}
    png.close();
 }
@@ -202,8 +227,8 @@ void writeColorBufferToTexture(SDL_Texture * tex, MFR::Color * buf)
 int main(int argc, const char * argv[]) {
     std::cout << "Hello, World!\n" << std::endl;
 
-	int width = 60;
-	int height = 60;
+	int width = 300;
+	int height = 300;
 
 	/* RENDER IMAGE TO SCREEN */
 	
