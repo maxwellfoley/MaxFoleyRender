@@ -237,11 +237,6 @@ int main(int argc, const char * argv[]) {
 //	calculateImage(pixels, width, height);
 	MFR::Raycaster::RenderImage(cornellBox, pixels, width, height, 0);
 	
-	for(int i = 0; i < width*height; i++)
-	{
-		std::cout << "pixels i " << pixels[i] << std::endl;
-	}
-	
 	SDL_Texture * tex = getBlankTexture(win, ren, width, height);
 	writeColorBufferToTexture(tex,pixels);
 

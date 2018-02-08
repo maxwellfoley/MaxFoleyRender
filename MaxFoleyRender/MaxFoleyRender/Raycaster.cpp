@@ -18,7 +18,6 @@ void Raycaster::RenderImage(std::shared_ptr<Scene> scene, Color * pixels, int wi
 			for(int i = 0; i < width; i++)
 			{	
 				Color color = GetPixelColor(scene->camera, scene, i, j, width, height, indirectRays);
-				std::cout << i << " " << j << " " << color << std::endl;
 				pixels[j*width +i] = color;
 			}
 		}
@@ -104,6 +103,8 @@ Color Raycaster::GetPixelColor(std::shared_ptr<Camera> camera, std::shared_ptr<S
 			color += addTo;
 
 		}
+		std::cout << x << ", " << y << std::endl;
+
 		return color;
 	}
 	else {
@@ -135,7 +136,7 @@ std::shared_ptr<Surfel> Raycaster::CastSingleRay(std::shared_ptr<Scene> scene, R
 	//loop through triangles and check for hits
 	for(int i = 0; i < tt.size() ; i++)
 	{
-		//std::cout << tt[i] << std::endl;
+		std::cout << tt[i] << std::endl;
 		float b [3];
 		float t = 10000000;
 		//MY VERSION
