@@ -90,6 +90,7 @@ lights	MaxFoleyRender/Scene.h	/^			std::vector<std::shared_ptr<Light>> lights;$/
 loadFromObjFile	MaxFoleyRender/SceneObject.cpp	/^void MFR::SceneObject::loadFromObjFile(std::string filename) {$/;"	f	class:MFR::SceneObject
 main	MaxFoleyRender/MaxFoleyRender/main.cpp	/^int main(int argc, const char * argv[]) {$/;"	f
 makeCornellBoxScene	MaxFoleyRender/MaxFoleyRender/main.cpp	/^std::shared_ptr<MFR::Scene> makeCornellBoxScene() {$/;"	f
+makeSingleCubeScene	MaxFoleyRender/MaxFoleyRender/main.cpp	/^std::shared_ptr<MFR::Scene> makeSingleCubeScene() {$/;"	f
 material	MaxFoleyRender/Surfel.h	/^			std::shared_ptr<Material> material;$/;"	m	class:MFR::Surfel
 material	MaxFoleyRender/Tri.h	/^			std::shared_ptr<Material> material;$/;"	m	class:MFR::Tri
 materials	MaxFoleyRender/Scene.h	/^			std::vector<std::shared_ptr<Material>> materials;$/;"	m	class:MFR::Scene

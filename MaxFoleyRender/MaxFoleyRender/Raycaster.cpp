@@ -13,6 +13,7 @@ using namespace MFR;
 
 void Raycaster::RenderImage(std::shared_ptr<Scene> scene, Color * pixels, int width, int height, int indirectRays)
 {
+		scene->poseMesh();
 		for(int j = 0; j < height; j++)
 		{
 			for(int i = 0; i < width; i++)
@@ -78,8 +79,9 @@ Color Raycaster::GetPixelColor(std::shared_ptr<Camera> camera, std::shared_ptr<S
 				if(!shadowed)
 				{
 					float multiplier = lightDir.dot(surfel->normal);
-
-					Color addTo = lamb * multiplier * lights[i]->biradiance(surfel->position);
+					
+					float br = lights[i]->biradiance(surfel->position);
+					Color addTo = lamb * multiplier * br;
 					if(addTo.r < 0.0){ addTo.r = 0.0;}
 					if(addTo.g < 0.0){ addTo.g = 0.0;}
 					if(addTo.b < 0.0){ addTo.b = 0.0;}
@@ -120,7 +122,7 @@ std::shared_ptr<Surfel> Raycaster::CastSingleRay(std::shared_ptr<Scene> scene, R
 {
 	
 	//get all triangles and etc. in the scene
-	std::vector<Tri> tt = scene->poseMesh();
+	std::vector<Tri> tt = scene->posedMesh;
 
 	Point P = ray.origin;
 	Vector w = ray.direction;
@@ -136,7 +138,6 @@ std::shared_ptr<Surfel> Raycaster::CastSingleRay(std::shared_ptr<Scene> scene, R
 	//loop through triangles and check for hits
 	for(int i = 0; i < tt.size() ; i++)
 	{
-		std::cout << tt[i] << std::endl;
 		float b [3];
 		float t = 10000000;
 		//MY VERSION
@@ -152,7 +153,7 @@ std::shared_ptr<Surfel> Raycaster::CastSingleRay(std::shared_ptr<Scene> scene, R
 	{
 			float distance = minT;
 
-			Vector normal = ((tt[minI].points[1] - tt[minI].points[0]).cross(tt[minI].points[2] - tt[minI].points[1])).unit();
+			Vector normal = -((tt[minI].points[1] - tt[minI].points[0]).cross(tt[minI].points[2] - tt[minI].points[1])).unit();
 			std::shared_ptr<Surfel> surfel = std::make_shared<Surfel>(ray.origin + distance*ray.direction,normal,tt[minI].material);
 			return surfel;
 		

@@ -32,6 +32,7 @@ namespace MFR {
 		
 			float biradiance(Point p)
 			{
+				//return 1.0;
 				//if(LightType = PointLght)
 				float intensity = 1/pow((p-position).length(),2);
 				return intensity * strength;

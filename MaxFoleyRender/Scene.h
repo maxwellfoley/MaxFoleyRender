@@ -28,6 +28,7 @@ namespace MFR {
 			std::vector<std::shared_ptr<Light>> lights;
 			std::shared_ptr<Camera> camera;
 			std::vector<std::shared_ptr<Material>> materials;
+			std::vector<Tri> posedMesh;
 		
 			Scene() {
 			
@@ -86,6 +87,7 @@ namespace MFR {
 					}
 				}
 				
+				posedMesh = returnData;
 				return returnData;
 			}
 	};
