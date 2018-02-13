@@ -13,13 +13,6 @@
 
 void MFR::SceneObject::loadFromObjFile(std::string filename) {
 	
-	//step 1: figure out how to read in a file line by line
-	//step 2: get all lines starting with v and add them to an array of points
-	//step 3: get all lines starting with f and using them to add all these points to the tris array
-	//step 4: put in usemtl, this will require figuring out how to load materials as well
-	//https://www.cs.cmu.edu/~mbz/personal/graphics/obj.html
-	
-	
 	#include <fstream>
 	std::ifstream infile(filename);
 	if(!infile.is_open()){

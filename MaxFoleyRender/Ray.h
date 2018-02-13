@@ -16,6 +16,9 @@ namespace MFR {
     	public:
         	Point origin;
         	Vector direction;
+			
+			Ray(){}
+		
 			Ray(Point o, Vector dir)
 			{
 				origin = o;

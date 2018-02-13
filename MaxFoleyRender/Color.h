@@ -27,7 +27,13 @@ namespace MFR {
 				g = 0.0;
 				b = 0.0;
 			}
-
+		
+			Color(float f)
+			{
+				r = f;
+				g = f;
+				b = f;
+			}
 
 			Color(float _r, float _g, float _b)
 			{
@@ -76,6 +82,24 @@ namespace MFR {
 				lhs.b*=f;
 				return lhs;
 			}
+		
+			//color multiplication
+			Color & operator*=(Color rhs)
+			{
+				this->r = this->r*rhs.r;
+				this->g = this->g*rhs.g;
+				this->b = this->b*rhs.b;
+
+				return *this;
+			}
+			friend Color operator*(Color lhs, Color rhs)
+			{
+				lhs.r*=rhs.r;
+				lhs.g*=rhs.g;
+				lhs.b*=rhs.b;
+				return lhs;
+			}
+		
 		
 			//scalar division
 			Color & operator/=(float f)

@@ -127,6 +127,7 @@ operator <<	MaxFoleyRender/Vector.h	/^			friend std::ostream& operator<<(std::os
 origin	MaxFoleyRender/Ray.h	/^        	Point origin;$/;"	m	class:MFR::Ray
 points	MaxFoleyRender/Tri.h	/^			Point points[3];$/;"	m	class:MFR::Tri
 poseMesh	MaxFoleyRender/Scene.h	/^			std::vector<Tri> poseMesh()$/;"	f	class:MFR::Scene
+posedMesh	MaxFoleyRender/Scene.h	/^			std::vector<Tri> posedMesh;$/;"	m	class:MFR::Scene
 position	MaxFoleyRender/Camera.h	/^			Point position;$/;"	m	class:MFR::Camera
 position	MaxFoleyRender/Light.h	/^			Point position;$/;"	m	class:MFR::Light
 position	MaxFoleyRender/SceneObject.h	/^			Point position;$/;"	m	class:MFR::SceneObject

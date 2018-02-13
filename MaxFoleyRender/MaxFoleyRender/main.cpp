@@ -262,7 +262,12 @@ int main(int argc, const char * argv[]) {
 	//initialize pixel buffer
 	MFR::Color * pixels = new MFR::Color[width*height];
 //	calculateImage(pixels, width, height);
-	MFR::Raycaster::RenderImage(cornellBox, pixels, width, height, 0);
+	MFR::RaycasterOptions options;
+	options.width = width;
+	options.height = height;
+	options.numRays = 1;
+	options.numScatteringEvents = 0;
+	MFR::Raycaster::RenderImage(cornellBox, pixels, options);
 	
 	SDL_Texture * tex = getBlankTexture(win, ren, width, height);
 	writeColorBufferToTexture(tex,pixels);

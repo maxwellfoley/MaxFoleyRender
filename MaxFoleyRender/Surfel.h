@@ -26,7 +26,13 @@ namespace MFR {
 			{
 				position = _position; normal = _normal; material = _material;
 			}
-
+		
+			void scatter(Vector before, Color weight, Vector after)
+			{
+				after = normal.hemiRandom(before);
+				weight = Color(after.dot(normal)/3.14159265359);
+				return;
+			}
 	};
 }
 

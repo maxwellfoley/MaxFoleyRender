@@ -30,12 +30,12 @@ namespace MFR {
 				position = _position; strength = _strength; type = _type;
 			}
 		
-			float biradiance(Point p)
+			Color biradiance(Point p)
 			{
 				//return 1.0;
 				//if(LightType = PointLght)
 				float intensity = 1/pow((p-position).length(),2);
-				return intensity * strength;
+				return color * intensity * strength;
 			}
 		};
 }
