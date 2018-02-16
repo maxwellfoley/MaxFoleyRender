@@ -4,17 +4,23 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
+AddEmissiveTerms	MaxFoleyRender/MaxFoleyRender/Raycaster.cpp	/^void Raycaster::AddEmissiveTerms(int i, Ray * rayBuffer, Color * colorBuffer, std::shared_ptr<Surfel> * surfelBuffer, Color * modulationBuffer)$/;"	f	class:Raycaster
 Camera	MaxFoleyRender/Camera.h	/^			Camera(){}$/;"	f	class:MFR::Camera
 Camera	MaxFoleyRender/Camera.h	/^	class Camera$/;"	c	namespace:MFR
 Camera_h	MaxFoleyRender/Camera.h	/^#define Camera_h$/;"	d
 CastSingleRay	MaxFoleyRender/MaxFoleyRender/Raycaster.cpp	/^std::shared_ptr<Surfel> Raycaster::CastSingleRay(std::shared_ptr<Scene> scene, Ray ray)$/;"	f	class:Raycaster
 Color	MaxFoleyRender/Color.h	/^			Color(float _r, float _g, float _b)$/;"	f	class:MFR::Color
+Color	MaxFoleyRender/Color.h	/^			Color(float f)$/;"	f	class:MFR::Color
 Color	MaxFoleyRender/Color.h	/^			Color(void)$/;"	f	class:MFR::Color
 Color	MaxFoleyRender/Color.h	/^	class Color {$/;"	c	namespace:MFR
 Color_h	MaxFoleyRender/Color.h	/^#define Color_h$/;"	d
+GenerateRay	MaxFoleyRender/MaxFoleyRender/Raycaster.cpp	/^void Raycaster::GenerateRay(int i, Ray * rayBuffer, std::shared_ptr<Camera> camera, RaycasterOptions options)$/;"	f	class:Raycaster
+GetLightInfo	MaxFoleyRender/MaxFoleyRender/Raycaster.cpp	/^void Raycaster::GetLightInfo(int i, std::vector<std::shared_ptr<Light>> lights, std::shared_ptr<Surfel> * surfelBuffer, Color * biradianceBuffer, Ray* shadowRayBuffer)$/;"	f	class:Raycaster
 GetPixelColor	MaxFoleyRender/MaxFoleyRender/Raycaster.cpp	/^Color Raycaster::GetPixelColor(std::shared_ptr<Camera> camera, std::shared_ptr<Scene> scene, int x, int y, int width, int height, int indirectRays)$/;"	f	class:Raycaster
 IllumMode	MaxFoleyRender/Material.h	/^	enum IllumMode {flat, lambert, blinnPhong};$/;"	g	namespace:MFR
+IntersectRay	MaxFoleyRender/MaxFoleyRender/Raycaster.cpp	/^void Raycaster::IntersectRay(int i, Ray * rayBuffer, std::shared_ptr<Surfel>  * surfelBuffer, std::vector<Tri> tt)$/;"	f	class:Raycaster
 IntersectTriangle	MaxFoleyRender/MaxFoleyRender/Raycaster.cpp	/^bool Raycaster::IntersectTriangle(Ray ray, Tri t, float b[3], float& dist)$/;"	f	class:Raycaster
+KillThreads	MaxFoleyRender/MaxFoleyRender/Raycaster.cpp	/^void Raycaster::KillThreads(std::thread * t, int numThreads)$/;"	f	class:Raycaster
 Light	MaxFoleyRender/Light.h	/^			Light() {$/;"	f	class:MFR::Light
 Light	MaxFoleyRender/Light.h	/^			Light(Point _position, float _strength, LightType _type)$/;"	f	class:MFR::Light
 Light	MaxFoleyRender/Light.h	/^	class Light {$/;"	c	namespace:MFR
@@ -36,18 +42,23 @@ Material	MaxFoleyRender/Material.h	/^			Material(MFR::Color diffuseColor)$/;"	f	
 Material	MaxFoleyRender/Material.h	/^	class Material$/;"	c	namespace:MFR
 Material_h	MaxFoleyRender/Material.h	/^#define Material_h$/;"	d
 PointLight	MaxFoleyRender/Light.h	/^	enum LightType{PointLight};$/;"	e	enum:MFR::LightType
+Ray	MaxFoleyRender/Ray.h	/^			Ray(){}$/;"	f	class:MFR::Ray
 Ray	MaxFoleyRender/Ray.h	/^			Ray(Point o, Vector dir)$/;"	f	class:MFR::Ray
 Ray	MaxFoleyRender/Ray.h	/^	class Ray {$/;"	c	namespace:MFR
 Ray_h	MaxFoleyRender/Ray.h	/^#define Ray_h$/;"	d
 Raycaster	MaxFoleyRender/MaxFoleyRender/Raycaster.h	/^	class Raycaster {$/;"	c	namespace:MFR
+RaycasterOptions	MaxFoleyRender/MaxFoleyRender/Raycaster.h	/^	struct RaycasterOptions {$/;"	s	namespace:MFR
 Raycaster_h	MaxFoleyRender/MaxFoleyRender/Raycaster.h	/^#define Raycaster_h$/;"	d
-RenderImage	MaxFoleyRender/MaxFoleyRender/Raycaster.cpp	/^void Raycaster::RenderImage(std::shared_ptr<Scene> scene, Color * pixels, int width, int height, int indirectRays)$/;"	f	class:Raycaster
+RenderImage	MaxFoleyRender/MaxFoleyRender/Raycaster.cpp	/^void Raycaster::RenderImage(std::shared_ptr<Scene> scene, Color * colorBuffer, RaycasterOptions options)$/;"	f	class:Raycaster
+ScatterRay	MaxFoleyRender/MaxFoleyRender/Raycaster.cpp	/^void Raycaster::ScatterRay(int i, Ray * rayBuffer, std::shared_ptr<Surfel> * surfelBuffer, Color * modulationBuffer, RaycasterOptions options)$/;"	f	class:Raycaster
 Scene	MaxFoleyRender/Scene.h	/^			Scene() {$/;"	f	class:MFR::Scene
 Scene	MaxFoleyRender/Scene.h	/^	class Scene {$/;"	c	namespace:MFR
 SceneObject	MaxFoleyRender/SceneObject.h	/^			SceneObject(std::string filename)$/;"	f	class:MFR::SceneObject
 SceneObject	MaxFoleyRender/SceneObject.h	/^	class SceneObject {$/;"	c	namespace:MFR
 SceneObject_h	MaxFoleyRender/SceneObject.h	/^#define SceneObject_h$/;"	d
 Scene_h	MaxFoleyRender/Scene.h	/^#define Scene_h$/;"	d
+ShadePixel	MaxFoleyRender/MaxFoleyRender/Raycaster.cpp	/^void Raycaster::ShadePixel(int i, std::shared_ptr<Surfel> * surfelBuffer, Ray * shadowRayBuffer, Color * colorBuffer, Color * biradianceBuffer, Color * modulationBuffer, bool * lightShadowedBuffer) {$/;"	f	class:Raycaster
+ShadowTest	MaxFoleyRender/MaxFoleyRender/Raycaster.cpp	/^void Raycaster::ShadowTest(int i, Ray * shadowRayBuffer, std::shared_ptr<Surfel> * surfelBuffer, bool* lightShadowedBuffer, std::vector<Tri> tt) {$/;"	f	class:Raycaster
 Surfel	MaxFoleyRender/Surfel.h	/^			Surfel()$/;"	f	class:MFR::Surfel
 Surfel	MaxFoleyRender/Surfel.h	/^			Surfel(Point _position, Vector _normal, std::shared_ptr<Material> _material)$/;"	f	class:MFR::Surfel
 Surfel	MaxFoleyRender/Surfel.h	/^	class Surfel {$/;"	c	namespace:MFR
@@ -65,7 +76,7 @@ abs	MaxFoleyRender/Vector.h	/^			Vector & abs()$/;"	f	class:MFR::Vector
 ambient	MaxFoleyRender/Material.h	/^			Color ambient;$/;"	m	class:MFR::Material
 arma_Vector	MaxFoleyRender/Vector.h	/^			arma::fvec arma_Vector;$/;"	m	class:MFR::Vector
 b	MaxFoleyRender/Color.h	/^			float b;$/;"	m	class:MFR::Color
-biradiance	MaxFoleyRender/Light.h	/^			float biradiance(Point p)$/;"	f	class:MFR::Light
+biradiance	MaxFoleyRender/Light.h	/^			Color biradiance(Point p)$/;"	f	class:MFR::Light
 blinnPhong	MaxFoleyRender/Material.h	/^	enum IllumMode {flat, lambert, blinnPhong};$/;"	e	enum:MFR::IllumMode
 calculateImage	MaxFoleyRender/MaxFoleyRender/main.cpp	/^void calculateImage(MFR::Color * buf, int width, int height)$/;"	f
 camera	MaxFoleyRender/Scene.h	/^			std::shared_ptr<Camera> camera;$/;"	m	class:MFR::Scene
@@ -82,6 +93,7 @@ g	MaxFoleyRender/Color.h	/^			float g;$/;"	m	class:MFR::Color
 getBlankTexture	MaxFoleyRender/MaxFoleyRender/main.cpp	/^SDL_Texture * getBlankTexture(SDL_Window * win, SDL_Renderer * ren, int width, int height)$/;"	f
 getImageTexture	MaxFoleyRender/MaxFoleyRender/main.cpp	/^SDL_Texture * getImageTexture(char * filename, SDL_Window * win, SDL_Renderer * ren)$/;"	f
 getMaterialsFromFile	MaxFoleyRender/Material.h	/^			static std::vector<std::shared_ptr<Material>> getMaterialsFromFile(std::string filename)$/;"	f	class:MFR::Material
+height	MaxFoleyRender/MaxFoleyRender/Raycaster.h	/^		int height;$/;"	m	struct:MFR::RaycasterOptions
 hemiRandom	MaxFoleyRender/Vector.h	/^			static Vector hemiRandom(Vector v)$/;"	f	class:MFR::Vector
 illumMode	MaxFoleyRender/Material.h	/^			IllumMode illumMode;$/;"	m	class:MFR::Material
 lambert	MaxFoleyRender/Material.h	/^	enum IllumMode {flat, lambert, blinnPhong};$/;"	e	enum:MFR::IllumMode
@@ -98,10 +110,14 @@ materials	MaxFoleyRender/SceneObject.h	/^			std::map<std::string, std::shared_pt
 mesh	MaxFoleyRender/SceneObject.h	/^			std::vector<Tri> mesh;$/;"	m	class:MFR::SceneObject
 name	MaxFoleyRender/Material.h	/^			std::string name;$/;"	m	class:MFR::Material
 normal	MaxFoleyRender/Surfel.h	/^			Vector normal;$/;"	m	class:MFR::Surfel
+numRays	MaxFoleyRender/MaxFoleyRender/Raycaster.h	/^		int numRays;$/;"	m	struct:MFR::RaycasterOptions
+numScatteringEvents	MaxFoleyRender/MaxFoleyRender/Raycaster.h	/^		int numScatteringEvents;$/;"	m	struct:MFR::RaycasterOptions
 objects	MaxFoleyRender/Scene.h	/^			std::vector<std::shared_ptr<SceneObject>> objects;$/;"	m	class:MFR::Scene
+operator *	MaxFoleyRender/Color.h	/^			friend Color operator*(Color lhs, Color rhs)$/;"	f	class:MFR::Color
 operator *	MaxFoleyRender/Color.h	/^			friend Color operator*(Color lhs, const float f)$/;"	f	class:MFR::Color
 operator *	MaxFoleyRender/Vector.h	/^			friend MFR::Vector operator*(MFR::Vector lhs, const float rhs)$/;"	f	class:MFR::Vector
 operator *	MaxFoleyRender/Vector.h	/^			friend MFR::Vector operator*(const float rhs, MFR::Vector lhs)$/;"	f	class:MFR::Vector
+operator *=	MaxFoleyRender/Color.h	/^			Color & operator*=(Color rhs)$/;"	f	class:MFR::Color
 operator *=	MaxFoleyRender/Color.h	/^			Color & operator*=(float f)$/;"	f	class:MFR::Color
 operator *=	MaxFoleyRender/Vector.h	/^			Vector & operator*=(float f)$/;"	f	class:MFR::Vector
 operator +	MaxFoleyRender/Color.h	/^			friend MFR::Color operator+(MFR::Color lhs, const MFR::Color& rhs)$/;"	f	class:MFR::Color
@@ -139,6 +155,7 @@ rotation	MaxFoleyRender/Camera.h	/^			Point rotation;$/;"	m	class:MFR::Camera
 rotation	MaxFoleyRender/SceneObject.h	/^			Vector rotation;$/;"	m	class:MFR::SceneObject
 scale	MaxFoleyRender/SceneObject.h	/^			Vector scale;$/;"	m	class:MFR::SceneObject
 scale	MaxFoleyRender/Vector.h	/^			Vector scale(Vector scale)$/;"	f	class:MFR::Vector
+scatter	MaxFoleyRender/Surfel.h	/^			void scatter(Vector before, Color weight, Vector after)$/;"	f	class:MFR::Surfel
 setMaterialOnAll	MaxFoleyRender/SceneObject.h	/^			void setMaterialOnAll(std::shared_ptr<Material> material)$/;"	f	class:MFR::SceneObject
 shadowsEnabled	MaxFoleyRender/Light.h	/^			bool shadowsEnabled;$/;"	m	class:MFR::Light
 specular	MaxFoleyRender/Material.h	/^			Color specular;$/;"	m	class:MFR::Material
@@ -148,6 +165,7 @@ toString	MaxFoleyRender/Vector.h	/^			std::string toString()$/;"	f	class:MFR::Ve
 translate	MaxFoleyRender/Vector.h	/^			Vector translate(Vector translation)$/;"	f	class:MFR::Vector
 type	MaxFoleyRender/Light.h	/^			LightType type;$/;"	m	class:MFR::Light
 unit	MaxFoleyRender/Vector.h	/^			Vector unit() {$/;"	f	class:MFR::Vector
+width	MaxFoleyRender/MaxFoleyRender/Raycaster.h	/^		int width;$/;"	m	struct:MFR::RaycasterOptions
 writeColorBufferToTexture	MaxFoleyRender/MaxFoleyRender/main.cpp	/^void writeColorBufferToTexture(SDL_Texture * tex, MFR::Color * buf)$/;"	f
 writeImageToFile	MaxFoleyRender/MaxFoleyRender/main.cpp	/^void writeImageToFile(MFR::Color * buf, char * filename, int width, int height)$/;"	f
 x	MaxFoleyRender/Vector.h	/^			float x(){$/;"	f	class:MFR::Vector

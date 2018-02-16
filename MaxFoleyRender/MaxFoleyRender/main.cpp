@@ -20,11 +20,11 @@
 std::shared_ptr<MFR::Scene> makeSingleCubeScene() {
 	std::shared_ptr<MFR::Scene> scene = std::make_shared<MFR::Scene>();
 
-	std::shared_ptr<MFR::Material> whiteMaterial = std::make_shared<MFR::Material>(MFR::Color(1.0,1.0,1.0));
+	std::shared_ptr<MFR::Material> whiteMaterial = std::make_shared<MFR::Material>(MFR::Color(1.0,0.0,0.0));
 	std::shared_ptr<MFR::SceneObject> cube = std::make_shared<MFR::SceneObject>("cube.obj");
 	cube->setMaterialOnAll(whiteMaterial);
-	cube->scale = MFR::Point(1.0,1.0,1.0);
-	cube->position = MFR::Point(0.0,0.0,-5.0);
+	cube->scale = MFR::Point(1.0,4.0,1.0);
+	cube->position = MFR::Point(0.0,0.0,-3.0);
 	cube->rotation = MFR::Point(0,0,0);
 	scene->objects.push_back(cube);
 	
@@ -229,8 +229,8 @@ void writeColorBufferToTexture(SDL_Texture * tex, MFR::Color * buf)
 int main(int argc, const char * argv[]) {
     std::cout << "Hello, World!\n" << std::endl;
 
-	int width = 500;
-	int height = 500;
+	int width = 60;
+	int height = 60;
 
 	/* RENDER IMAGE TO SCREEN */
 	

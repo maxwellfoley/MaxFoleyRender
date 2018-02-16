@@ -130,6 +130,7 @@ namespace MFR {
 				return v;
 			}
 		
+
 			//dot product
 			float dot(const Vector & rhs)
 			{
@@ -208,7 +209,6 @@ namespace MFR {
 				arma::fvec newVec;
 				newVec << mathResult(0) << mathResult(1) << mathResult(2);
 				
-				//TODO: matrixes are right, but output is wrong
 				//std::cout << "RESULT" << newVec << std::endl;
 
 				(*this).arma_Vector = newVec;
@@ -221,6 +221,12 @@ namespace MFR {
 				returnVal << (arma_Vector(0) * scale.x()) << (arma_Vector(1) * scale.y()) << (arma_Vector(2) * scale.z());
 				(*this).arma_Vector = returnVal;
 				return *this;
+			}
+		
+			float distance(Vector p)
+			{
+				Vector dist = *this - p;
+				return dist.length();
 			}
 		
 			static Vector hemiRandom(Vector v)

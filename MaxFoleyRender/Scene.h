@@ -18,6 +18,7 @@
 #include "SceneObject.h"
 #include "Surfel.h"
 #include "Tri.h"
+#include "TriTree.h"
 #include "Vector.h"
 
 namespace MFR {
@@ -28,20 +29,27 @@ namespace MFR {
 			std::vector<std::shared_ptr<Light>> lights;
 			std::shared_ptr<Camera> camera;
 			std::vector<std::shared_ptr<Material>> materials;
-			std::vector<Tri> posedMesh;
+			TriTree posedMesh;
 		
 			Scene() {
 			
 			}
 		
-			std::vector<Tri> poseMesh()
+			TriTree poseMesh()
 			{
-				std::vector<Tri> returnData;
+				std::vector<std::shared_ptr<Tri>> returnData;
 				
 				//loop through all objects in the scene
 				for(std::vector<std::shared_ptr<SceneObject>>::iterator it = objects.begin(); it!=objects.end(); ++it)
 				{
 					std::vector<Tri> mesh = (*it)->mesh;
+					
+					//turn this into shared_ptrs here, as good of a place as any aaa idk
+					std::vector<std::shared_ptr<Tri>> spMesh;
+					for(std::vector<Tri>::iterator it2 = mesh.begin(); it2!=mesh.end(); ++it2)
+					{
+						spMesh.push_back(std::make_shared<Tri>(*it2));
+					}
 					
 					/*
 					//unwind materialIndexes for this object so that we get array of triangle index to material
@@ -65,30 +73,30 @@ namespace MFR {
 					
 				
 					//now prep the tris
-					for(std::vector<Tri>::iterator it2b = mesh.begin(); it2b!=mesh.end(); ++it2b)
+					for(std::vector<std::shared_ptr<Tri>>::iterator it2b = spMesh.begin(); it2b!=spMesh.end(); ++it2b)
 					{
-						Tri t = *it2b;
+						std::shared_ptr<Tri> t = *it2b;
 						
 
-						t.points[0].scale((*it)->scale);
-						t.points[1].scale((*it)->scale);
-						t.points[2].scale((*it)->scale);
+						t->points[0].scale((*it)->scale);
+						t->points[1].scale((*it)->scale);
+						t->points[2].scale((*it)->scale);
 
-						t.points[0].rotateInDegrees((*it)->rotation);
-						t.points[1].rotateInDegrees((*it)->rotation);
-						t.points[2].rotateInDegrees((*it)->rotation);
+						t->points[0].rotateInDegrees((*it)->rotation);
+						t->points[1].rotateInDegrees((*it)->rotation);
+						t->points[2].rotateInDegrees((*it)->rotation);
 
-						t.points[0].translate((*it)->position);
-						t.points[1].translate((*it)->position);
-						t.points[2].translate((*it)->position);
+						t->points[0].translate((*it)->position);
+						t->points[1].translate((*it)->position);
+						t->points[2].translate((*it)->position);
 
 						returnData.push_back(t);
 						
 					}
 				}
 				
-				posedMesh = returnData;
-				return returnData;
+				posedMesh = TriTree(returnData);
+				return posedMesh;
 			}
 	};
 }

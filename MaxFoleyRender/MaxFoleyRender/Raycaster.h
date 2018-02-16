@@ -19,6 +19,7 @@
 #include "SceneObject.h"
 #include "Surfel.h"
 #include "Tri.h"
+#include "TriTree.h"
 #include "Vector.h"
 #include <thread>
 
@@ -43,9 +44,9 @@ namespace MFR {
 		static Color GetPixelColor(std::shared_ptr<Camera> camera, std::shared_ptr<Scene>  scene, int x, int y, int width, int height, bool fixedPrimitives, int indirectRays);
 		static std::shared_ptr<Surfel> CastSingleRay(std::shared_ptr<Scene> scene, Ray ray, bool fixedPrimitives);
 		static void GenerateRay(int i, Ray * rayBuffer, std::shared_ptr<Camera> camera, RaycasterOptions options);
-		static void IntersectRay(int i,Ray * rayBuffer, std::shared_ptr<Surfel> * surfelBuffer, std::vector<Tri> tt);
+		static void IntersectRay(int i,Ray * rayBuffer, std::shared_ptr<Surfel> * surfelBuffer, TriTree* tt);
 		static void GetLightInfo(int i, std::vector<std::shared_ptr<Light>> lights, std::shared_ptr<Surfel> * surfelBuffer, Color * biradianceBuffer, Ray* shadowRayBuffer);
-		static void ShadowTest(int i, Ray * shadowRayBuffer, std::shared_ptr<Surfel> * surfelBuffer, bool* lightShadowedBuffer, std::vector<Tri> tt);
+		static void ShadowTest(int i, Ray * shadowRayBuffer, std::shared_ptr<Surfel> * surfelBuffer, bool* lightShadowedBuffer, TriTree* tt);
 		static void ShadePixel(int i, std::shared_ptr<Surfel> * surfelBuffer, Ray * shadowRayBuffer, Color * colorBuffer, Color * biradianceBuffer, Color * modulationBuffer, bool * lightShadowedBuffer);
 		static void ScatterRay(int i, Ray * rayBuffer, std::shared_ptr<Surfel> * surfelBuffer, Color * modulationBuffer, RaycasterOptions options);
 		static void AddEmissiveTerms(int i, Ray * rayBuffer, Color * colorBuffer, std::shared_ptr<Surfel> * surfelBuffer, Color * modulationBuffer);

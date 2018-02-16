@@ -29,6 +29,8 @@ void Raycaster::RenderImage(std::shared_ptr<Scene> scene, Color * colorBuffer, R
 
 
 	scene->poseMesh();
+	TriTree tt = scene->posedMesh;
+	
 	std::vector<std::shared_ptr<Light>> lights = scene->lights;
 
 	/*
@@ -43,6 +45,8 @@ void Raycaster::RenderImage(std::shared_ptr<Scene> scene, Color * colorBuffer, R
 		*/
 	for(int i = 0; i < options.numRays; i++)
 	{
+		std::cout << "generating rays" << std::endl;
+		
 		//generate primary rays
 		std::thread *t = new std::thread[numPix];
 		for (int i = 0; i < numPix; ++i) {
@@ -51,20 +55,29 @@ void Raycaster::RenderImage(std::shared_ptr<Scene> scene, Color * colorBuffer, R
 		KillThreads(t,numPix);
 		delete [] t;
 		
+		for(int w = 0; w < 100; w++)
+		{
+			//std::cout << "ray buffer " << w << " " <<rayBuffer[w] << std::endl;
+		}
+
 		//initialize the modulationBuffer to Color3(1 / paths per pixel)
 		for (int i2 = 0; i2 < numPix; ++i2) {
 			modulationBuffer[i2] = Color(1.0/options.numRays,1.0/options.numRays,1.0/options.numRays);
 		}
 	
-		for(int j = 0; j < options.numScatteringEvents; j++)
+		for(int j = 0; j < options.numRays; j++)
 		{
+			std::cout << "intersecting rays" << std::endl;
+
 			//intersect all rays, storing the result in surfelbuffer
 			std::thread *t2 = new std::thread[numPix];
 			for (int i = 0; i < numPix; ++i) {
-				t2[i] = std::thread(IntersectRay, i, rayBuffer, surfelBuffer);
+				t2[i] = std::thread(IntersectRay, i, rayBuffer, surfelBuffer, &tt);
 			}
 			KillThreads(t2,numPix);
 			delete [] t2;
+			
+			std::cout << "adding emissive terms" << std::endl;
 		
 			//add emissive terms
 			std::thread *t7 = new std::thread[numPix];
@@ -76,6 +89,8 @@ void Raycaster::RenderImage(std::shared_ptr<Scene> scene, Color * colorBuffer, R
 			
 			if(lights.size() > 0)
 			{
+				std::cout << "getting light info" << std::endl;
+
 				//get biradiance and ray for shadow calculation
 				std::thread *t3 = new std::thread[numPix];
 				for (int i = 0; i < numPix; ++i) {
@@ -84,13 +99,17 @@ void Raycaster::RenderImage(std::shared_ptr<Scene> scene, Color * colorBuffer, R
 				KillThreads(t3,numPix);
 				delete [] t3;
 				
+				std::cout << "shadow tests" << std::endl;
+
 				//figure out whether or not the surfel is in shadow
 				std::thread *t4 = new std::thread[numPix];
 				for (int i = 0; i < numPix; ++i) {
-					t4[i] = std::thread(ShadowTest, i, shadowRayBuffer, surfelBuffer, lightShadowedBuffer);
+					t4[i] = std::thread(ShadowTest, i, shadowRayBuffer, surfelBuffer, lightShadowedBuffer, &tt);
 				}
 				KillThreads(t4,numPix);
 				delete [] t4;
+				
+				std::cout << "shading pixels" << std::endl;
 
 				//color the pixel
 				std::thread *t5 = new std::thread[numPix];
@@ -103,10 +122,12 @@ void Raycaster::RenderImage(std::shared_ptr<Scene> scene, Color * colorBuffer, R
 			
 			if(j < options.numScatteringEvents-1)
 			{
+			std::cout << "scattering rays" << std::endl;
+
 			//if not the last iteration, scatter the rays
 			std::thread *t6 = new std::thread[numPix];
 			for (int i = 0; i < numPix; ++i) {
-				t6[i] = std::thread(ScatterRay, i, rayBuffer, surfelBuffer, modulationBuffer);
+				t6[i] = std::thread(ScatterRay, i, rayBuffer, surfelBuffer, modulationBuffer, options);
 
 			}
 			KillThreads(t6,numPix);
@@ -149,7 +170,7 @@ void Raycaster::AddEmissiveTerms(int i, Ray * rayBuffer, Color * colorBuffer, st
 		colorBuffer[i] += addTo;
 	}
 }
-void Raycaster::IntersectRay(int i, Ray * rayBuffer, std::shared_ptr<Surfel>  * surfelBuffer, std::vector<Tri> tt)
+void Raycaster::IntersectRay(int i, Ray * rayBuffer, std::shared_ptr<Surfel>  * surfelBuffer, TriTree * tt)
 {
 
 	Ray ray = rayBuffer[i];
@@ -157,8 +178,29 @@ void Raycaster::IntersectRay(int i, Ray * rayBuffer, std::shared_ptr<Surfel>  * 
 	Point P = ray.origin;
 	Vector w = ray.direction;
 	
-	//std::cout << ray << std::endl;
+		float px = P.x();
+	float py = P.y();
+	float pz = P.z();
+	float wx = w.x();
+	float wy = w.y();
+	float wz = w.z();
+	
+	float b[3] = {0,0,0};
+	float distance = 10000000;
 
+	std::shared_ptr<Tri> foundTri = tt->intersectRay(ray, b, distance);
+	
+	if(foundTri!=NULL)
+	{
+		Vector normal = -(foundTri->points[1] - foundTri->points[0]).cross(foundTri->points[2] - foundTri->points[1]).unit();
+		std::shared_ptr<Surfel> surfel = std::make_shared<Surfel>(ray.origin + distance*ray.direction,normal,foundTri->material);
+		surfelBuffer[i] = surfel;
+	}
+	else {
+		surfelBuffer[i] = nullptr;
+	}
+	//std::cout << ray << std::endl;
+/*
 	//find the closest triangle in the scene
 	bool foundHit = false;
 	float * minB;
@@ -181,6 +223,7 @@ void Raycaster::IntersectRay(int i, Ray * rayBuffer, std::shared_ptr<Surfel>  * 
 	//if it hit something
 	if(minI > -1)
 	{
+		std::cout << "hit surfel " << std::endl;
 			float distance = minT;
 
 			Vector normal = -((tt[minI].points[1] - tt[minI].points[0]).cross(tt[minI].points[2] - tt[minI].points[1])).unit();
@@ -190,7 +233,7 @@ void Raycaster::IntersectRay(int i, Ray * rayBuffer, std::shared_ptr<Surfel>  * 
 	else
 	{
 		surfelBuffer[i] = nullptr;
-	}
+	}*/
 }
 
 void Raycaster::GetLightInfo(int i, std::vector<std::shared_ptr<Light>> lights, std::shared_ptr<Surfel> * surfelBuffer, Color * biradianceBuffer, Ray* shadowRayBuffer)
@@ -245,18 +288,15 @@ void Raycaster::GetLightInfo(int i, std::vector<std::shared_ptr<Light>> lights, 
 		
 	}
 }
-void Raycaster::ShadowTest(int i, Ray * shadowRayBuffer, std::shared_ptr<Surfel> * surfelBuffer, bool* lightShadowedBuffer, std::vector<Tri> tt) {
+void Raycaster::ShadowTest(int i, Ray * shadowRayBuffer, std::shared_ptr<Surfel> * surfelBuffer, bool* lightShadowedBuffer, TriTree * tt) {
 		if(surfelBuffer[i])
 		{
-			//TODO: work out this shit
-			float * b;
+			float b[3] = {0,0,0};
 			float dist;
 			//bool foundHit = IntersectTriangle(shadowRayBuffer[i], b,dist);
 			
-			for(int j = 0; j < tt.size(); j++)
-			{
-				bool foundHit = IntersectTriangle(shadowRayBuffer[i], tt[j],b,dist);
-				if(foundHit && dist < (shadowRayBuffer[i].origin - surfelBuffer[i]->position).length() -.1)
+				std::shared_ptr<Tri> foundHit = tt->intersectRay(shadowRayBuffer[i],b,dist);
+				if(foundHit != NULL && dist < (shadowRayBuffer[i].origin - surfelBuffer[i]->position).length() -.1)
 				{
 					lightShadowedBuffer[i] = true;
 				}
@@ -264,13 +304,16 @@ void Raycaster::ShadowTest(int i, Ray * shadowRayBuffer, std::shared_ptr<Surfel>
 				{
 					lightShadowedBuffer[i] = false;
 				}
-
-			}
 		}
 }
 
 void Raycaster::ShadePixel(int i, std::shared_ptr<Surfel> * surfelBuffer, Ray * shadowRayBuffer, Color * colorBuffer, Color * biradianceBuffer, Color * modulationBuffer, bool * lightShadowedBuffer) {
 	
+		if(surfelBuffer[i])
+		{
+		colorBuffer[i] = surfelBuffer[i]->material->diffuse;
+		return;
+	}
 		if(!lightShadowedBuffer[i] && surfelBuffer[i])
 		{
 			std::shared_ptr<Surfel> surfel = surfelBuffer[i];
@@ -302,11 +345,9 @@ void Raycaster::ScatterRay(int i, Ray * rayBuffer, std::shared_ptr<Surfel> * sur
 
 			Vector w_before = -1 * rayBuffer[i].direction;
 			
-			//TODO:: figure out how to do this`
 			Vector w_after;
 			Color weight;
 			
-			//TODO::implement thisscatter thing
 			surfel->scatter(w_before, weight, w_after);
 			modulationBuffer[i]*=weight;
 			
@@ -316,7 +357,7 @@ void Raycaster::ScatterRay(int i, Ray * rayBuffer, std::shared_ptr<Surfel> * sur
 		}
 
 }
-
+/*
 Color Raycaster::GetPixelColor(std::shared_ptr<Camera> camera, std::shared_ptr<Scene> scene, int x, int y, int width, int height, int indirectRays)
 {			
 	//calculate ray direction and origin based on camera position
@@ -404,15 +445,15 @@ Color Raycaster::GetPixelColor(std::shared_ptr<Camera> camera, std::shared_ptr<S
 
 		return Color(0.,0.,0.);
 	}
-}
+}*/
 
 
-
+/*
 std::shared_ptr<Surfel> Raycaster::CastSingleRay(std::shared_ptr<Scene> scene, Ray ray)
 {
 	
 	//get all triangles and etc. in the scene
-	std::vector<Tri> tt = scene->posedMesh;
+	TriTree tt = scene->posedMesh;
 
 	Point P = ray.origin;
 	Vector w = ray.direction;
@@ -420,6 +461,11 @@ std::shared_ptr<Surfel> Raycaster::CastSingleRay(std::shared_ptr<Scene> scene, R
 	//std::cout << ray << std::endl;
 
 	//find the closest triangle in the scene
+
+	//OLD VERSION
+	
+	/*
+	
 	bool foundHit = false;
 	float * minB;
 	float minT = 10000000;
@@ -430,9 +476,7 @@ std::shared_ptr<Surfel> Raycaster::CastSingleRay(std::shared_ptr<Scene> scene, R
 	{
 		float b [3];
 		float t = 10000000;
-		//MY VERSION
-		foundHit = IntersectTriangle(ray, tt[i],b,t);
-
+		//foundHit = IntersectTriangle(ray, tt[i],b,t);
 	
 		if(t < minT && t >= 0.0f) { minB = b; minT = t; minI = i;}
 	}
@@ -453,14 +497,28 @@ std::shared_ptr<Surfel> Raycaster::CastSingleRay(std::shared_ptr<Scene> scene, R
 	{
 		return NULL;
 	}
-}
+	
+	//NEW VERSION
+	float b [3];
+	float distance = 10000000;
+
+	std::shared_ptr<Tri> foundTri = tt.intersectRay(ray,b,distance);
+	if(foundTri!=NULL)
+	{
+
+			Vector normal = -((foundTri->points[1] - foundTri->points[0]).cross(foundTri->points[2] - foundTri->points[1])).unit();
+			std::shared_ptr<Surfel> surfel = std::make_shared<Surfel>(ray.origin + distance*ray.direction,normal,foundTri->material);
+			return surfel;
+	}
+	return nullptr;
+
+}*/
 
 
 bool Raycaster::IntersectTriangle(Ray ray, Tri t, float b[3], float& dist)
 {
 	Point P = ray.origin;
 	Vector w = ray.direction;
-
 	//edge vectors
 	 Vector e_1 = t.points[1] - t.points[0];
 	 Vector e_2 = t.points[2] - t.points[0];
@@ -474,11 +532,13 @@ bool Raycaster::IntersectTriangle(Ray ray, Tri t, float b[3], float& dist)
 	// Backfacing / nearly parallel, or close to the limit of precision?
  	if (n.dot(w) >= 0)
 	{
+		//	std::cout << "false because backfacing or close to limit of precision" << std::endl;
+
 		return false;
 	}
 	if(std::abs(a) <= .0000001)
 	{
-		//std::cout << "e1" << e_1 << "e2" << e_2 << "q" << q <<std::endl;
+	//	std::cout << "false because  a is close to zero" << std::endl;
 		return false;
 	}
 	
@@ -486,13 +546,35 @@ bool Raycaster::IntersectTriangle(Ray ray, Tri t, float b[3], float& dist)
 	 Vector s = (P - t.points[0]) / a;
 	 Vector r = s.cross(e_1);
 	
-  b[0] = s.dot(q);
+  	b[0] = s.dot(q);
 	b[1] = r.dot(w);
 	b[2] = 1.0f - b[0] - b[1];
 
+/*	float b0 = b[0];
+	float b1 = b[1];
+	float b2 = b[2];
+	
+	float t0x = t.points[0].x();
+	float t0y = t.points[0].y();
+	float t0z = t.points[0].z();
+	
+	float px = P.x();
+	float py = P.y();
+	float pz = P.z();
+	float wx = w.x();
+	float wy = w.y();
+	float wz = w.z();
+
+	float t1x = t.points[1].x();
+	float t1y = t.points[1].y();
+	float t1z = t.points[1].z();
+	float t2x = t.points[2].x();
+	float t2y = t.points[2].y();
+	float t2z = t.points[2].z();*/
 	// Intersected outside triangle?
 	if ((b[0] < 0.0f) || (b[1] < 0.0f) || (b[2] < 0.0f))
 	{
+		//std::cout << "false because it intersected outside triangle" << std::endl;
 		return false;
 	}
 
@@ -509,6 +591,6 @@ void Raycaster::KillThreads(std::thread * t, int numThreads)
 }
 
 /* TODO:
-Use tri tree data structure in order to calculate the nearest tri
+Turn tri tree into shared ptr
 */
 
