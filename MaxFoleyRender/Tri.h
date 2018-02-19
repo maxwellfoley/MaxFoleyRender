@@ -34,7 +34,7 @@ namespace MFR {
 	
 			friend std::ostream& operator<<(std::ostream &strm, const MFR::Tri &tri) {
 				return strm << "Triangle with points " << tri.points[0] << " " << tri.points[1]
-				<< " " << tri.points[2];
+				<< " " << tri.points[2] << " @";
 			}
 		
 			Point getMidpoint() {
@@ -90,7 +90,7 @@ namespace MFR {
 				float maxZ = std::max(points[0].z(), points[1].z());
 				maxZ = std::max(maxZ, points[2].z());
 				
-				return Box(Point(minX,minY,minZ),maxX-minX,maxY-minY,maxZ-minZ);
+				return Box(Point(minX,minY,minZ),.001+maxX-minX,.001+maxY-minY,.001+maxZ-minZ);
 			}
 		
 		//TODO: implement, just copy the logic over from raycaster
@@ -128,6 +128,7 @@ namespace MFR {
 			b[1] = r.dot(w);
 			b[2] = 1.0f - b[0] - b[1];
 			
+			/*
 			float b0 = b[0];
 			float b1 = b[1];
 			float b2 = b[2];
@@ -148,7 +149,8 @@ namespace MFR {
 			float t1z = points[1].z();
 			float t2x = points[2].x();
 			float t2y = points[2].y();
-			float t2z = points[2].z();
+			float t2z = points[2].z();*/
+			
 			// Intersected outside triangle?
 			if ((b[0] < 0.0f) || (b[1] < 0.0f) || (b[2] < 0.0f))
 			{

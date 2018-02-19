@@ -89,7 +89,7 @@ namespace MFR {
 			}
 		
 			std::shared_ptr<Tri> irHelper(KDNode * node, Ray ray, float b[3], float& dist)
-			{				b[0] = 1.0;
+			{				
 
 				if(node->boundingBox.intersect(ray))
 				{
@@ -120,6 +120,82 @@ namespace MFR {
 				return NULL;
 				
 			}
+			std::string preorderPrint(KDNode * node, int depth) const
+			{
+				//if node is null or empty, we hit bottom, dont print anything
+				if(!node || node->tris.size() == 0)
+				{
+					return "";
+				}
+				
+				//otherwise form a string to represent this node
+				std::string str;
+				
+				for(int i = 0; i < depth; i++)
+				{
+					str.append("-");
+				}
+				
+				str.append(std::to_string(node->tris.size()));
+				str.append(" tris");
+				
+				str.append(", box size: ");
+				str.append(std::to_string(node->boundingBox.width));
+				str.append(" x ");
+				str.append(std::to_string(node->boundingBox.height));
+				str.append(" x ");
+				str.append(std::to_string(node->boundingBox.depth));
+				str.append(" origin: ");
+				str.append(std::to_string(node->boundingBox.origin.x()));
+				str.append(", ");
+				str.append(std::to_string(node->boundingBox.origin.y()));
+				str.append(", ");
+				str.append(std::to_string(node->boundingBox.origin.z()));
+				str.append("\n");
+				
+				//TEMPORARY:: check to see if this leaf has the triangle we are looking for
+				/*
+				for(std::vector<std::shared_ptr<MFR::Tri>>::iterator it = node->tris.begin(); it != node->tris.end(); ++it) {
+					if((*it)->points[0].x() == -5 &&
+					(*it)->points[0].y() == 5 &&
+					(*it)->points[0].z() == -4.9 &&
+					(*it)->points[1].x() == -5 &&
+					(*it)->points[1].y() == -5 &&
+					(*it)->points[1].z() == -4.9 &&
+					(*it)->points[2].x() == 5 &&
+					(*it)->points[2].y() == -5 &&
+					(*it)->points[2].z() == -4.9)
+					{
+						str.append("THIS IS THE NODE WHERE OUR TRIANGLE IS ^^^ \n");
+					}
+				}*/
+				
+				//if it is a leaf, print the triangles
+				if(node->left->tris.size() == 0 && node->right->tris.size() == 0)
+				{
+
+					for(std::vector<std::shared_ptr<MFR::Tri>>::iterator it = node->tris.begin(); it != node->tris.end(); ++it) {
+						for(int i = 0; i < depth+1; i++)
+						{
+							str.append("-");
+						}
+					
+						std::stringstream ss;
+						ss << *(*it);char  c[100];
+						ss.get(c,100,'@');
+						str.append(c);
+						str.append(")\n");
+					}
+					
+				}
+				
+				//then inorder print
+				std::string first = preorderPrint(node->left, depth+1);
+				str.append(first);
+				std::string last = preorderPrint(node->right, depth+1);
+				str.append(last);
+				return str;
+			}
 		
 		public:
 			TriTree() {
@@ -133,9 +209,18 @@ namespace MFR {
 		
 			std::shared_ptr<Tri> intersectRay(Ray ray, float * b, float & dist)
 			{
-				b[0] = 1.0;
 				return irHelper(root,ray,b,dist);
 			}
+		
+			std::vector<std::shared_ptr<Tri>> getTriVector()
+			{
+				return root->tris;
+			}
+		
+			friend std::ostream& operator<<(std::ostream &strm, const TriTree &tt) {
+				return strm << tt.preorderPrint(tt.root,1);
+			}
+		
 	};
 }
 

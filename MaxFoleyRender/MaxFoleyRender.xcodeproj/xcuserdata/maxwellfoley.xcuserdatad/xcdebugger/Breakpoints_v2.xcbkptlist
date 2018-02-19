@@ -9,14 +9,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MaxFoleyRender/Raycaster.cpp"
-            timestampString = "540452453.07433"
+            filePath = "MaxFoleyRender/main.cpp"
+            timestampString = "540709598.627694"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
-            landmarkName = "Raycaster::RenderImage(std::shared_ptr&lt;Scene&gt; scene, Color * colorBuffer, RaycasterOptions options)"
-            landmarkType = "7">
+            startingLineNumber = "361"
+            endingLineNumber = "361"
+            landmarkName = "main(int argc, const char * argv[])"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -25,110 +25,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MaxFoleyRender/Raycaster.cpp"
-            timestampString = "540452453.07433"
+            filePath = "MaxFoleyRender/main.cpp"
+            timestampString = "540711011.774452"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
-            landmarkName = "Raycaster::IntersectRay(int i, Ray * rayBuffer, std::shared_ptr&lt;Surfel&gt; * surfelBuffer, TriTree * tt)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MFR::Raycaster::IntersectRay(int, MFR::Ray*, std::__1::shared_ptr&lt;MFR::Surfel&gt;*, MFR::TriTree*)"
-                  moduleName = "MaxFoleyRender"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maxwellfoley/Documents/max-foley-render/MaxFoleyRender/MaxFoleyRender/Raycaster.cpp"
-                  timestampString = "540452250.210201"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "241"
-                  endingLineNumber = "241"
-                  offsetFromSymbolStart = "1747">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MFR::Raycaster::IntersectRay(int, MFR::Ray*, std::__1::shared_ptr&lt;MFR::Surfel&gt;*, MFR::TriTree*)"
-                  moduleName = "MaxFoleyRender"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maxwellfoley/Documents/max-foley-render/MaxFoleyRender/MaxFoleyRender/Raycaster.cpp"
-                  timestampString = "540452250.212828"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "241"
-                  endingLineNumber = "241"
-                  offsetFromSymbolStart = "1839">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MaxFoleyRender/Raycaster.cpp"
-            timestampString = "540452453.07433"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
-            landmarkName = "Raycaster::IntersectRay(int i, Ray * rayBuffer, std::shared_ptr&lt;Surfel&gt; * surfelBuffer, TriTree * tt)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MFR::Raycaster::IntersectRay(int, MFR::Ray*, std::__1::shared_ptr&lt;MFR::Surfel&gt;*, MFR::TriTree*)"
-                  moduleName = "MaxFoleyRender"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maxwellfoley/Documents/max-foley-render/MaxFoleyRender/MaxFoleyRender/Raycaster.cpp"
-                  timestampString = "540452250.2190419"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "241"
-                  endingLineNumber = "241"
-                  offsetFromSymbolStart = "1747">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MFR::Raycaster::IntersectRay(int, MFR::Ray*, std::__1::shared_ptr&lt;MFR::Surfel&gt;*, MFR::TriTree*)"
-                  moduleName = "MaxFoleyRender"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maxwellfoley/Documents/max-foley-render/MaxFoleyRender/MaxFoleyRender/Raycaster.cpp"
-                  timestampString = "540452250.221019"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "241"
-                  endingLineNumber = "241"
-                  offsetFromSymbolStart = "1839">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MaxFoleyRender/Raycaster.cpp"
-            timestampString = "540452453.07433"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
-            landmarkName = "Raycaster::IntersectRay(int i, Ray * rayBuffer, std::shared_ptr&lt;Surfel&gt; * surfelBuffer, TriTree * tt)"
-            landmarkType = "7">
+            startingLineNumber = "300"
+            endingLineNumber = "300"
+            landmarkName = "rayBoxIntersectionUnitTests()"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

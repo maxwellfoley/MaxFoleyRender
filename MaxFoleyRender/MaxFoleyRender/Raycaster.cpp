@@ -72,6 +72,8 @@ void Raycaster::RenderImage(std::shared_ptr<Scene> scene, Color * colorBuffer, R
 			//intersect all rays, storing the result in surfelbuffer
 			std::thread *t2 = new std::thread[numPix];
 			for (int i = 0; i < numPix; ++i) {
+				//for now, do this sequentially to debug
+				//IntersectRay(i,rayBuffer,surfelBuffer,&tt);
 				t2[i] = std::thread(IntersectRay, i, rayBuffer, surfelBuffer, &tt);
 			}
 			KillThreads(t2,numPix);
@@ -135,7 +137,7 @@ void Raycaster::RenderImage(std::shared_ptr<Scene> scene, Color * colorBuffer, R
 		}
 
 		}
-		
+		std::cout << "finished!" << std::endl;
 
 	}
 }
@@ -175,6 +177,7 @@ void Raycaster::IntersectRay(int i, Ray * rayBuffer, std::shared_ptr<Surfel>  * 
 
 	Ray ray = rayBuffer[i];
 	
+	//std::cout << i << " " << ray << std::endl;
 	Point P = ray.origin;
 	Vector w = ray.direction;
 	
@@ -192,11 +195,13 @@ void Raycaster::IntersectRay(int i, Ray * rayBuffer, std::shared_ptr<Surfel>  * 
 	
 	if(foundTri!=NULL)
 	{
+	//	std::cout<<"found tri " << foundTri << std::endl;
 		Vector normal = -(foundTri->points[1] - foundTri->points[0]).cross(foundTri->points[2] - foundTri->points[1]).unit();
 		std::shared_ptr<Surfel> surfel = std::make_shared<Surfel>(ray.origin + distance*ray.direction,normal,foundTri->material);
 		surfelBuffer[i] = surfel;
 	}
 	else {
+	//	std::cout << "NOT found " << std::endl;
 		surfelBuffer[i] = nullptr;
 	}
 	//std::cout << ray << std::endl;

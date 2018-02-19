@@ -16,13 +16,13 @@ namespace MFR {
 	{
 		public:
 			Point origin;
-			int width;
-			int height;
-			int depth;
+			float width;
+			float height;
+			float depth;
 		
 			Box(){}
 		
-			Box(Point _origin, int _width, int _height, int _depth)
+			Box(Point _origin, float _width, float _height, float _depth)
 			{
 				origin = _origin; width = _width; height = _height; depth = _depth;
 			}
@@ -66,13 +66,31 @@ namespace MFR {
 			//https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-box-intersection
 			bool intersect(Ray ray) {
 				Point minBound = origin;
-				Point maxBound = Point(width,height,depth);
+				Point maxBound = Point(origin.x()+width,origin.y()+height,origin.z()+depth);
+				
+				//if ray origin is in the box, return true
+				if(ray.origin.x() > minBound.x() && ray.origin.x() < maxBound.x() &&
+				ray.origin.y() > minBound.y() && ray.origin.y() < maxBound.y() &&
+				ray.origin.z() > minBound.z() && ray.origin.z() < maxBound.z())
+				{
+					return true;
+				}
 				
 				//contains the amount of traveling along the ray you would need to do to enter the bounds from the "near side" on x,y,and z planes
-				Point entranceDists = (minBound-ray.origin)/ray.direction;
+				Point nearDists = (minBound-ray.origin)/ray.direction;
 				
 				//contains the amount of traveling along the ray you would need to do to enter the bounds from the "far side" on x,y,and z planes
-				Point exitDists = (maxBound-ray.origin)/ray.direction;
+				Point farDists = (maxBound-ray.origin)/ray.direction;
+				
+				//is the secret just that we need to make sure all the entrance dists are smaller than the exit dists in order to actually have the correct understanding of entrance and exit?
+				
+				Point entranceDists = Point(std::min(nearDists.x(), farDists.x()),
+				std::min(nearDists.y(), farDists.y()),
+				std::min(nearDists.z(), farDists.z()));
+				
+				Point exitDists = Point(std::max(nearDists.x(), farDists.x()),
+				std::max(nearDists.y(), farDists.y()),
+				std::max(nearDists.z(), farDists.z()));
 				
 				//either ALL the exit dists must be bigger than the entrance dists (if it enters from the front) or vice versa (if it enters from the back). otherwise it doesnt actually hit the cube
 				
@@ -104,8 +122,16 @@ namespace MFR {
 				{
 					return false;
 				}
-
-
+			}
+		
+			float size()
+			{
+				return width*height*depth;
+			}
+		
+			friend std::ostream& operator<<(std::ostream &strm, const MFR::Box &box) {
+				return strm << "Box with origin " << box.origin << " width " << box.width <<
+				" height " << box.height << " depth " << box.depth;
 			}
 	};
 }
