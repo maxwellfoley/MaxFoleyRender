@@ -6,7 +6,7 @@
 !_TAG_PROGRAM_VERSION	5.8	//
 AddEmissiveTerms	MaxFoleyRender/MaxFoleyRender/Raycaster.cpp	/^void Raycaster::AddEmissiveTerms(int i, Ray * rayBuffer, Color * colorBuffer, std::shared_ptr<Surfel> * surfelBuffer, Color * modulationBuffer)$/;"	f	class:Raycaster
 Box	MaxFoleyRender/MaxFoleyRender/Box.h	/^			Box(){}$/;"	f	class:MFR::Box
-Box	MaxFoleyRender/MaxFoleyRender/Box.h	/^			Box(Point _origin, int _width, int _height, int _depth)$/;"	f	class:MFR::Box
+Box	MaxFoleyRender/MaxFoleyRender/Box.h	/^			Box(Point _origin, float _width, float _height, float _depth)$/;"	f	class:MFR::Box
 Box	MaxFoleyRender/MaxFoleyRender/Box.h	/^	class Box$/;"	c	namespace:MFR
 Box_h	MaxFoleyRender/MaxFoleyRender/Box.h	/^#define Box_h$/;"	d
 Camera	MaxFoleyRender/Camera.h	/^			Camera(){}$/;"	f	class:MFR::Camera
@@ -95,7 +95,7 @@ camera	MaxFoleyRender/Scene.h	/^			std::shared_ptr<Camera> camera;$/;"	m	class:M
 clamp	MaxFoleyRender/MaxFoleyRender/main.cpp	/^int clamp(int v, int lo, int hi)$/;"	f
 color	MaxFoleyRender/Light.h	/^			Color color;$/;"	m	class:MFR::Light
 cross	MaxFoleyRender/Vector.h	/^			Vector cross(const Vector & rhs)$/;"	f	class:MFR::Vector
-depth	MaxFoleyRender/MaxFoleyRender/Box.h	/^			int depth;$/;"	m	class:MFR::Box
+depth	MaxFoleyRender/MaxFoleyRender/Box.h	/^			float depth;$/;"	m	class:MFR::Box
 diffuse	MaxFoleyRender/Material.h	/^			Color diffuse;$/;"	m	class:MFR::Material
 direction	MaxFoleyRender/Ray.h	/^        	Vector direction;$/;"	m	class:MFR::Ray
 distance	MaxFoleyRender/Vector.h	/^			float distance(Vector p)$/;"	f	class:MFR::Vector
@@ -110,7 +110,8 @@ getBoundingBox	MaxFoleyRender/Tri.h	/^			Box getBoundingBox(){$/;"	f	class:MFR::
 getImageTexture	MaxFoleyRender/MaxFoleyRender/main.cpp	/^SDL_Texture * getImageTexture(char * filename, SDL_Window * win, SDL_Renderer * ren)$/;"	f
 getMaterialsFromFile	MaxFoleyRender/Material.h	/^			static std::vector<std::shared_ptr<Material>> getMaterialsFromFile(std::string filename)$/;"	f	class:MFR::Material
 getMidpoint	MaxFoleyRender/Tri.h	/^			Point getMidpoint() {$/;"	f	class:MFR::Tri
-height	MaxFoleyRender/MaxFoleyRender/Box.h	/^			int height;$/;"	m	class:MFR::Box
+getTriVector	MaxFoleyRender/MaxFoleyRender/TriTree.h	/^			std::vector<std::shared_ptr<Tri>> getTriVector()$/;"	f	class:MFR::TriTree
+height	MaxFoleyRender/MaxFoleyRender/Box.h	/^			float height;$/;"	m	class:MFR::Box
 height	MaxFoleyRender/MaxFoleyRender/Raycaster.h	/^		int height;$/;"	m	struct:MFR::RaycasterOptions
 hemiRandom	MaxFoleyRender/Vector.h	/^			static Vector hemiRandom(Vector v)$/;"	f	class:MFR::Vector
 illumMode	MaxFoleyRender/Material.h	/^			IllumMode illumMode;$/;"	m	class:MFR::Material
@@ -159,6 +160,8 @@ operator /=	MaxFoleyRender/Vector.h	/^			Vector & operator\/=(float f)$/;"	f	cla
 operator <	MaxFoleyRender/Material.h	/^			friend bool operator< (const Material& a, const Material& b){$/;"	f	class:MFR::Material
 operator <<	MaxFoleyRender/Color.h	/^			friend std::ostream& operator<<(std::ostream &strm, const MFR::Color &c) {$/;"	f	class:MFR::Color
 operator <<	MaxFoleyRender/Material.h	/^			friend std::ostream& operator<<(std::ostream &strm, const MFR::Material &mat) {$/;"	f	class:MFR::Material
+operator <<	MaxFoleyRender/MaxFoleyRender/Box.h	/^			friend std::ostream& operator<<(std::ostream &strm, const MFR::Box &box) {$/;"	f	class:MFR::Box
+operator <<	MaxFoleyRender/MaxFoleyRender/TriTree.h	/^			friend std::ostream& operator<<(std::ostream &strm, const TriTree &tt) {$/;"	f	class:MFR::TriTree
 operator <<	MaxFoleyRender/Ray.h	/^			friend std::ostream& operator<<(std::ostream &strm, const MFR::Ray &ray) {$/;"	f	class:MFR::Ray
 operator <<	MaxFoleyRender/SceneObject.h	/^			friend std::ostream& operator<<(std::ostream &strm, const MFR::SceneObject &obj) {$/;"	f	class:MFR::SceneObject
 operator <<	MaxFoleyRender/Tri.h	/^			friend std::ostream& operator<<(std::ostream &strm, const MFR::Tri &tri) {$/;"	f	class:MFR::Tri
@@ -172,7 +175,10 @@ position	MaxFoleyRender/Camera.h	/^			Point position;$/;"	m	class:MFR::Camera
 position	MaxFoleyRender/Light.h	/^			Point position;$/;"	m	class:MFR::Light
 position	MaxFoleyRender/SceneObject.h	/^			Point position;$/;"	m	class:MFR::SceneObject
 position	MaxFoleyRender/Surfel.h	/^			Point position;$/;"	m	class:MFR::Surfel
+preorderPrint	MaxFoleyRender/MaxFoleyRender/TriTree.h	/^			std::string preorderPrint(KDNode * node, int depth) const$/;"	f	class:MFR::TriTree
 r	MaxFoleyRender/Color.h	/^			float r;$/;"	m	class:MFR::Color
+rayBoxIntersectionUnitTests	MaxFoleyRender/MaxFoleyRender/main.cpp	/^void rayBoxIntersectionUnitTests() {$/;"	f
+rayTriangleIntersectionUnitTests	MaxFoleyRender/MaxFoleyRender/main.cpp	/^void rayTriangleIntersectionUnitTests() {$/;"	f
 right	MaxFoleyRender/MaxFoleyRender/TriTree.h	/^			KDNode * right;$/;"	m	class:MFR::KDNode
 root	MaxFoleyRender/MaxFoleyRender/TriTree.h	/^			KDNode * root;$/;"	m	class:MFR::TriTree
 rotate	MaxFoleyRender/Vector.h	/^			Vector rotate(Vector rotation)$/;"	f	class:MFR::Vector
@@ -184,15 +190,17 @@ scale	MaxFoleyRender/Vector.h	/^			Vector scale(Vector scale)$/;"	f	class:MFR::V
 scatter	MaxFoleyRender/Surfel.h	/^			void scatter(Vector before, Color weight, Vector after)$/;"	f	class:MFR::Surfel
 setMaterialOnAll	MaxFoleyRender/SceneObject.h	/^			void setMaterialOnAll(std::shared_ptr<Material> material)$/;"	f	class:MFR::SceneObject
 shadowsEnabled	MaxFoleyRender/Light.h	/^			bool shadowsEnabled;$/;"	m	class:MFR::Light
+size	MaxFoleyRender/MaxFoleyRender/Box.h	/^			float size()$/;"	f	class:MFR::Box
 specular	MaxFoleyRender/Material.h	/^			Color specular;$/;"	m	class:MFR::Material
 specularExponent	MaxFoleyRender/Material.h	/^			float specularExponent;$/;"	m	class:MFR::Material
 strength	MaxFoleyRender/Light.h	/^			float strength;$/;"	m	class:MFR::Light
 toString	MaxFoleyRender/Vector.h	/^			std::string toString()$/;"	f	class:MFR::Vector
 translate	MaxFoleyRender/Vector.h	/^			Vector translate(Vector translation)$/;"	f	class:MFR::Vector
+triangleBoundingBoxUnitTests	MaxFoleyRender/MaxFoleyRender/main.cpp	/^void triangleBoundingBoxUnitTests() {$/;"	f
 tris	MaxFoleyRender/MaxFoleyRender/TriTree.h	/^			std::vector<std::shared_ptr<Tri>> tris;$/;"	m	class:MFR::KDNode
 type	MaxFoleyRender/Light.h	/^			LightType type;$/;"	m	class:MFR::Light
 unit	MaxFoleyRender/Vector.h	/^			Vector unit() {$/;"	f	class:MFR::Vector
-width	MaxFoleyRender/MaxFoleyRender/Box.h	/^			int width;$/;"	m	class:MFR::Box
+width	MaxFoleyRender/MaxFoleyRender/Box.h	/^			float width;$/;"	m	class:MFR::Box
 width	MaxFoleyRender/MaxFoleyRender/Raycaster.h	/^		int width;$/;"	m	struct:MFR::RaycasterOptions
 writeColorBufferToTexture	MaxFoleyRender/MaxFoleyRender/main.cpp	/^void writeColorBufferToTexture(SDL_Texture * tex, MFR::Color * buf)$/;"	f
 writeImageToFile	MaxFoleyRender/MaxFoleyRender/main.cpp	/^void writeImageToFile(MFR::Color * buf, char * filename, int width, int height)$/;"	f

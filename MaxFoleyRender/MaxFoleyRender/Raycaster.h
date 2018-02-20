@@ -43,15 +43,20 @@ namespace MFR {
 		
 		static Color GetPixelColor(std::shared_ptr<Camera> camera, std::shared_ptr<Scene>  scene, int x, int y, int width, int height, bool fixedPrimitives, int indirectRays);
 		static std::shared_ptr<Surfel> CastSingleRay(std::shared_ptr<Scene> scene, Ray ray, bool fixedPrimitives);
-		static void GenerateRay(int i, Ray * rayBuffer, std::shared_ptr<Camera> camera, RaycasterOptions options);
-		static void IntersectRay(int i,Ray * rayBuffer, std::shared_ptr<Surfel> * surfelBuffer, TriTree* tt);
-		static void GetLightInfo(int i, std::vector<std::shared_ptr<Light>> lights, std::shared_ptr<Surfel> * surfelBuffer, Color * biradianceBuffer, Ray* shadowRayBuffer);
-		static void ShadowTest(int i, Ray * shadowRayBuffer, std::shared_ptr<Surfel> * surfelBuffer, bool* lightShadowedBuffer, TriTree* tt);
-		static void ShadePixel(int i, std::shared_ptr<Surfel> * surfelBuffer, Ray * shadowRayBuffer, Color * colorBuffer, Color * biradianceBuffer, Color * modulationBuffer, bool * lightShadowedBuffer);
-		static void ScatterRay(int i, Ray * rayBuffer, std::shared_ptr<Surfel> * surfelBuffer, Color * modulationBuffer, RaycasterOptions options);
-		static void AddEmissiveTerms(int i, Ray * rayBuffer, Color * colorBuffer, std::shared_ptr<Surfel> * surfelBuffer, Color * modulationBuffer);
+		static void GenerateRays(int begin, int end, Ray * rayBuffer, std::shared_ptr<Camera> camera, RaycasterOptions options);
+		static void IntersectRays(int begin, int end, Ray * rayBuffer, std::shared_ptr<Surfel> * surfelBuffer, TriTree* tt);
+		static void GetLightInfo(int begin, int end, std::vector<std::shared_ptr<Light>> lights, std::shared_ptr<Surfel> * surfelBuffer, Color * biradianceBuffer, Ray* shadowRayBuffer);
+		static void ShadowTests(int begin, int end, Ray * shadowRayBuffer, std::shared_ptr<Surfel> * surfelBuffer, bool* lightShadowedBuffer, TriTree* tt);
+		static void ShadePixels(int begin, int end, std::shared_ptr<Surfel> * surfelBuffer, Ray * shadowRayBuffer, Color * colorBuffer, Color * biradianceBuffer, Color * modulationBuffer, bool * lightShadowedBuffer);
+		static void ScatterRays(int begin, int end, Ray * rayBuffer, std::shared_ptr<Surfel> * surfelBuffer, Color * modulationBuffer, RaycasterOptions options);
+		static void AddEmissiveTerms(int begin, int end, Ray * rayBuffer, Color * colorBuffer, std::shared_ptr<Surfel> * surfelBuffer, Color * modulationBuffer);
 
-		
+		template <class _Fp, class ..._Args>
+			static void multithread(_Fp&& __f, int num, _Args&&... __args);
+
+		template <class _Fp, class ..._Args>
+			static void runIndexes(_Fp&& __f, int begin, int end, _Args&&... __args);
+
 		static void KillThreads(std::thread * t, int numThreads);
 		
 	};

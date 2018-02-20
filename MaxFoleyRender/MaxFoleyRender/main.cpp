@@ -310,15 +310,16 @@ void triangleBoundingBoxUnitTests() {
 }
 
 int main(int argc, const char * argv[]) {
-
+	std::cout << "threads: " << std::thread::hardware_concurrency() << std::endl;
+	
 	//ok time to do some unit tests of my ray triangle intersection rn
 	rayBoxIntersectionUnitTests();
 	//return 0;
 	
     std::cout << "Hello, World!\n" << std::endl;
 
-	int width = 40;
-	int height = 40;
+	int width = 600;
+	int height = 600;
 
 	/* RENDER IMAGE TO SCREEN */
 	
@@ -458,6 +459,7 @@ int main(int argc, const char * argv[]) {
 
 /*TODO:
 
-Figure out how to do the memory stuff
+Move the multithreading to a function where instead of creating one thread per pixel, it creates  std::thread::hardware_concurrency() amount of threads, and basically just divides the image up into that amount of numbers
 
+figure out why lighting isnt working
 */
