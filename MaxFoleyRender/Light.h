@@ -32,7 +32,7 @@ namespace MFR {
 		
 			Color biradiance(Point p)
 			{
-				//return 1.0;
+				return 1.0;
 				//if(LightType = PointLght)
 				float intensity = 1/pow((p-position).length(),2);
 				return color * intensity * strength;

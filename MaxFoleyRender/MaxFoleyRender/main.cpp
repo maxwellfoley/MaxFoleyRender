@@ -17,6 +17,7 @@
 #include "SDL2/SDL.h"
 #include <pngwriter.h>
 
+//testing scene
 std::shared_ptr<MFR::Scene> makeSingleCubeScene() {
 	std::shared_ptr<MFR::Scene> scene = std::make_shared<MFR::Scene>();
 
@@ -41,6 +42,8 @@ std::shared_ptr<MFR::Scene> makeSingleCubeScene() {
 	return scene;
 
 }
+
+//there is not yet any way to import scenes or a UI to create them, so I define the scene I want rendered in this function
 std::shared_ptr<MFR::Scene> makeCornellBoxScene() {
 	std::shared_ptr<MFR::Scene> scene = std::make_shared<MFR::Scene>();
 	
@@ -112,10 +115,16 @@ std::shared_ptr<MFR::Scene> makeCornellBoxScene() {
 	scene->camera = camera;
 	
 	std::shared_ptr<MFR::Light> light = std::make_shared<MFR::Light>();
-	light->position = MFR::Point(0,3.0,0);
-	light->shadowsEnabled = true;
-	light->strength = 10.0;
+	light->position = MFR::Point(1.0,3.0,-2.0);
+	light->shadowsEnabled = false;
+	light->strength = 1.0;
 	scene->lights.push_back(light);
+	
+	std::shared_ptr<MFR::Light> light2 = std::make_shared<MFR::Light>();
+	light2->position = MFR::Point(0.0,2.0,0.0);
+	light2->shadowsEnabled = false;
+	light2->strength = 1.0;
+	scene->lights.push_back(light2);
 	
 	return scene;
 }
@@ -318,8 +327,8 @@ int main(int argc, const char * argv[]) {
 	
     std::cout << "Hello, World!\n" << std::endl;
 
-	int width = 600;
-	int height = 600;
+	int width = 500;
+	int height = 500;
 
 	/* RENDER IMAGE TO SCREEN */
 	
@@ -330,7 +339,7 @@ int main(int argc, const char * argv[]) {
 	}
 	
 	//Set up screen
-	SDL_Window *win = SDL_CreateWindow("Hello World!", 100, 100, width, height, SDL_WINDOW_SHOWN);
+	SDL_Window *win = SDL_CreateWindow("Max Foley Render!", 100, 100, width, height, SDL_WINDOW_SHOWN);
 	if (win == nullptr){
 		std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
 		SDL_Quit();
@@ -350,54 +359,9 @@ int main(int argc, const char * argv[]) {
 	cornellBox->poseMesh();
 	MFR::TriTree tt = cornellBox->posedMesh;
 	
-	//std::cout << "tri tree: " << tt << std::endl;
-	
-	//debug what is going on with the tri tree
-	
-	//i gotta loop through and figure out what tri it should be hitting, then figure out where it is in the tree
-	//MFR::Ray testingRay = MFR::Ray(MFR::Point(0,0,0),MFR::Vector(-1,1,-5));
-	MFR::Ray testingRay = MFR::Ray(MFR::Point(0, 0, 25),MFR::Vector(-0.131728, 0.0439092, -0.990313));
-	float b[3];
-	float dist;
-	std::shared_ptr<MFR::Tri> testingTri = tt.intersectRay(testingRay, b, dist);
-	if(testingTri!=NULL)
-	{
-		std::cout << *testingTri << std::endl;
-	}
-	else
-	{
-		std::cout << "no hit found" << std::endl;
-	}
-	
-	//now let us see if just iterating, we can find something
-	//YES. we did find something. the testing ray SHOULD hit this triangle:
-	//Triangle with points (-5, 5, -4.9) (-5, -5, -4.9) (5, -5, -4.9)
-	//Now we must figure out what route it should take through the tree
-	
-	
-	/*
-	std::vector<std::shared_ptr<MFR::Tri>> triList = tt.getTriVector();
-	float b2[3];
-	float dist2;
-	for(std::vector<std::shared_ptr<MFR::Tri>>::iterator it = triList.begin(); it != triList.end(); ++it) {
-							
-		std::shared_ptr<MFR::Tri> myTri = (*it);
-		bool a = myTri->intersect(testingRay,b2,dist2);
-		if(a) {
-			std::cout << "WE HIT ONE IN THIS NEXT THING!!! distance: " << dist2 <<
-			"triangle is " << *myTri << std::endl;
-		}
-		else {
-		
-		}
-	}*/
 
-	
-//	return 0;
-	
 	//initialize pixel buffer
 	MFR::Color * pixels = new MFR::Color[width*height];
-//	calculateImage(pixels, width, height);
 	MFR::RaycasterOptions options;
 	options.width = width;
 	options.height = height;
