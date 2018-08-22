@@ -1,6 +1,6 @@
 # MaxFoleyRender
 This is a work-in-progress personal project in which I have challenged myself to write an entire renderer from scratch in C++.
-I estimate that it is roughly 75-80% complete. 
+I estimate that it is roughly 80% complete. 
 
 Currently the only scene my algorithm has been tested on is [the standard "Cornell Box" scene](https://en.wikipedia.org/wiki/Cornell_box).
 This scene has been hardcoded into the program and there is currently no way to import a scene or for the user to define his or her own scene. 
