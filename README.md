@@ -6,4 +6,5 @@ Currently the only scene my algorithm has been tested on is [the standard "Corne
 This scene has been hardcoded into the program and there is currently no way to import a scene or for the user to define his or her own scene. 
 The plan for the project is to fix all bugs, test on more scenes, and allow the user to import their own scene for rendering.
 
-[[https://i.imgur.com/1tppEID.png]]
+This is a successful image of the Cornell Box drawn by my renderer:
+![Cornell box rendered with MaxFoleyRender](https://i.imgur.com/1tppEID.png)
