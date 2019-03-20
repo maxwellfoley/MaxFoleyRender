@@ -19,7 +19,6 @@
 		9429D0AF2015B33F005D3ABE /* libpngwriter.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9429D0AD2015B33F005D3ABE /* libpngwriter.dylib */; };
 		9429D0B4201709C6005D3ABE /* SceneObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9429D0B3201709C6005D3ABE /* SceneObject.cpp */; };
 		946720061FCB7404004D5287 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 946720051FCB7404004D5287 /* main.cpp */; };
-		94DE56C520199501004B1FBF /* randomtest.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 94DE56C420199501004B1FBF /* randomtest.txt */; };
 		94DE56C720199508004B1FBF /* canal-hill.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 94DE56C620199508004B1FBF /* canal-hill.obj */; };
 		94DE56CE201E671B004B1FBF /* Raycaster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94DE56CD201E671B004B1FBF /* Raycaster.cpp */; };
 /* End PBXBuildFile section */
@@ -32,7 +31,6 @@
 			dstSubfolderSpec = 7;
 			files = (
 				9429D0A120104AFC005D3ABE /* hello_world.bmp in CopyFiles */,
-				94DE56C520199501004B1FBF /* randomtest.txt in CopyFiles */,
 				94DE56C720199508004B1FBF /* canal-hill.obj in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,7 +62,6 @@
 		946720121FCB9CBF004D5287 /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Camera.h; path = ../Camera.h; sourceTree = "<group>"; };
 		9493ADEB2033D304002917BC /* TriTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TriTree.h; sourceTree = "<group>"; };
 		9493ADEC2033D542002917BC /* Box.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Box.h; sourceTree = "<group>"; };
-		94DE56C420199501004B1FBF /* randomtest.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = randomtest.txt; path = resources/randomtest.txt; sourceTree = "<group>"; };
 		94DE56C620199508004B1FBF /* canal-hill.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = "canal-hill.obj"; path = "resources/canal-hill.obj"; sourceTree = "<group>"; };
 		94DE56CB2019A728004B1FBF /* Scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Scene.h; path = ../Scene.h; sourceTree = "<group>"; };
 		94DE56CC201E6629004B1FBF /* Raycaster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Raycaster.h; sourceTree = "<group>"; };
@@ -111,7 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				94DE56C620199508004B1FBF /* canal-hill.obj */,
-				94DE56C420199501004B1FBF /* randomtest.txt */,
 				9429D0A020104AFC005D3ABE /* hello_world.bmp */,
 				946720041FCB7404004D5287 /* MaxFoleyRender */,
 				946720031FCB7404004D5287 /* Products */,

@@ -18,10 +18,9 @@ Color	MaxFoleyRender/Color.h	/^			Color(void)$/;"	f	class:MFR::Color
 Color	MaxFoleyRender/Color.h	/^	class Color {$/;"	c	namespace:MFR
 Color_h	MaxFoleyRender/Color.h	/^#define Color_h$/;"	d
 GenerateRays	MaxFoleyRender/MaxFoleyRender/Raycaster.cpp	/^void Raycaster::GenerateRays(int begin, int end, Ray * rayBuffer, std::shared_ptr<Camera> camera, RaycasterOptions options)$/;"	f	class:Raycaster
-GetLightInfo	MaxFoleyRender/MaxFoleyRender/Raycaster.cpp	/^void Raycaster::GetLightInfo(int begin, int end, std::vector<std::shared_ptr<Light>> lights, std::shared_ptr<Surfel> * surfelBuffer, Color * biradianceBuffer, Ray* shadowRayBuffer)$/;"	f	class:Raycaster
+GetLightInfo	MaxFoleyRender/MaxFoleyRender/Raycaster.cpp	/^void Raycaster::GetLightInfo(int begin, int end, std::vector<std::shared_ptr<Light>> lights, std::shared_ptr<Surfel> * surfelBuffer, Color * biradianceBuffer, Ray* shadowRayBuffer, bool* lightShadowedBuffer)$/;"	f	class:Raycaster
 IllumMode	MaxFoleyRender/Material.h	/^	enum IllumMode {flat, lambert, blinnPhong};$/;"	g	namespace:MFR
 IntersectRays	MaxFoleyRender/MaxFoleyRender/Raycaster.cpp	/^void Raycaster::IntersectRays(int begin, int end, Ray * rayBuffer, std::shared_ptr<Surfel>  * surfelBuffer, TriTree * tt)$/;"	f	class:Raycaster
-IntersectTriangle	MaxFoleyRender/MaxFoleyRender/Raycaster.cpp	/^bool Raycaster::IntersectTriangle(Ray ray, Tri t, float b[3], float& dist)$/;"	f	class:Raycaster
 KDNode	MaxFoleyRender/MaxFoleyRender/TriTree.h	/^			KDNode(){}$/;"	f	class:MFR::KDNode
 KDNode	MaxFoleyRender/MaxFoleyRender/TriTree.h	/^	class KDNode {$/;"	c	namespace:MFR
 KillThreads	MaxFoleyRender/MaxFoleyRender/Raycaster.cpp	/^void Raycaster::KillThreads(std::thread * t, int numThreads)$/;"	f	class:Raycaster

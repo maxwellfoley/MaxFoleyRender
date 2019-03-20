@@ -19,6 +19,10 @@ namespace MFR {
 			std::vector<std::shared_ptr<Tri>> tris;
 			Box boundingBox;
 			KDNode(){}
+			~KDNode(){
+				delete left;
+				delete right;
+			}
 	};
 
 	class TriTree {
@@ -58,7 +62,7 @@ namespace MFR {
 				
 				//alternate x y and z axis every time we go another level deeper
 				int axis = depth%3;
-				bool rightSide;
+				bool rightSide = true;
 
 				for(int i = 0; i < tris.size(); i++)
 				{

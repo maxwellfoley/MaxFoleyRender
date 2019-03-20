@@ -325,8 +325,6 @@ int main(int argc, const char * argv[]) {
 	rayBoxIntersectionUnitTests();
 	//return 0;
 	
-    std::cout << "Hello, World!\n" << std::endl;
-
 	int width = 500;
 	int height = 500;
 
@@ -356,9 +354,7 @@ int main(int argc, const char * argv[]) {
 	
 	//initialize scene
 	std::shared_ptr<MFR::Scene> cornellBox = makeCornellBoxScene();
-	cornellBox->poseMesh();
-	MFR::TriTree tt = cornellBox->posedMesh;
-	
+	cornellBox->poseMesh();	
 
 	//initialize pixel buffer
 	MFR::Color * pixels = new MFR::Color[width*height];
@@ -366,7 +362,7 @@ int main(int argc, const char * argv[]) {
 	options.width = width;
 	options.height = height;
 	options.numRays = 1;
-	options.numScatteringEvents = 0;
+	options.numScatteringEvents = 7;
 	MFR::Raycaster::RenderImage(cornellBox, pixels, options);
 	
 	SDL_Texture * tex = getBlankTexture(win, ren, width, height);
@@ -408,7 +404,7 @@ int main(int argc, const char * argv[]) {
 		
 	}
 	
-	delete pixels;
+	delete[] pixels;
 	
 	SDL_DestroyTexture(tex);
 	SDL_DestroyRenderer(ren);
@@ -422,8 +418,6 @@ int main(int argc, const char * argv[]) {
 }
 
 /*TODO:
-
-Move the multithreading to a function where instead of creating one thread per pixel, it creates  std::thread::hardware_concurrency() amount of threads, and basically just divides the image up into that amount of numbers
 
 figure out why lighting isnt working
 */

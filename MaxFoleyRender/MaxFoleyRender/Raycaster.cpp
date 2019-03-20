@@ -76,6 +76,12 @@ void Raycaster::RenderImage(std::shared_ptr<Scene> scene, Color * colorBuffer, R
 		std::cout << "finished!" << std::endl;
 
 	}
+	delete[] modulationBuffer;
+	delete[] rayBuffer;
+	delete[] surfelBuffer;
+	delete[] biradianceBuffer;
+	delete[] shadowRayBuffer;
+	delete[] lightShadowedBuffer;
 }
 template <class _Fp, class ..._Args>
 void Raycaster::multithread(_Fp&& __f, int num, _Args&&... __args){
@@ -169,7 +175,7 @@ void Raycaster::GetLightInfo(int begin, int end, std::vector<std::shared_ptr<Lig
 		if(surfelBuffer[i] != NULL)
 		{
 			std::shared_ptr<Light> light;
-			float weight;
+			float weight = 1.0;
 			std::shared_ptr<Surfel> surfel = surfelBuffer[i];
 			
 			if(lights.size()> 1)
@@ -199,7 +205,7 @@ void Raycaster::GetLightInfo(int begin, int end, std::vector<std::shared_ptr<Lig
 			else
 			{
 				light = lights[0];
-				weight = 1.0;
+				weight = 1.0;
 			}
 			
 			Point surfelPos = surfel->position;
@@ -287,7 +293,7 @@ void Raycaster::ScatterRays(int begin, int end, Ray * rayBuffer, std::shared_ptr
 			modulationBuffer[i]*=weight;
 			
 			float dotSign = w_after.dot(surfel->normal);
-			dotSign = dotSign / abs(dotSign);
+			dotSign = dotSign / std::abs(dotSign);
 			rayBuffer[i] = Ray(surfel->position +  surfel->normal * .1 * dotSign, w_after);
 		}
 	}

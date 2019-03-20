@@ -53,14 +53,6 @@ namespace MFR {
 				return lhs;
 			}
 
-			/*
-			//multiplication
-			friend Color operator*(Color lhs, Color rhs)
-			{
-				Color c = Color(lhs.r*rhs.r,lhs.g*rhs.g,lhs.b*rhs.b);
-				return c;
-			}*/
-		
 			//scalar multiplication
 			Color & operator*=(float f)
 			{

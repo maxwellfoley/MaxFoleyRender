@@ -17,7 +17,7 @@ void MFR::SceneObject::loadFromObjFile(std::string filename) {
 	std::ifstream infile(filename);
 	if(!infile.is_open()){
 		//TODO: throw error here
-		std::cout << "Couldn't read the darn file" << std::endl;
+		std::cout << "Couldn't read the file" << std::endl;
 	}
 	
 	std::string line;
