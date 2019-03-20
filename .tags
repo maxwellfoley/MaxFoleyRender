@@ -207,3 +207,4 @@ writeImageToFile	MaxFoleyRender/MaxFoleyRender/main.cpp	/^void writeImageToFile(
 x	MaxFoleyRender/Vector.h	/^			float x(){$/;"	f	class:MFR::Vector
 y	MaxFoleyRender/Vector.h	/^			float y(){$/;"	f	class:MFR::Vector
 z	MaxFoleyRender/Vector.h	/^			float z(){$/;"	f	class:MFR::Vector
+~KDNode	MaxFoleyRender/MaxFoleyRender/TriTree.h	/^			~KDNode(){$/;"	f	class:MFR::KDNode
