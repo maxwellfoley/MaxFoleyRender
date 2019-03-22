@@ -17,8 +17,8 @@
 		9429D0AB2015ABE1005D3ABE /* libpng16.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9429D0A72015ABE1005D3ABE /* libpng16.dylib */; };
 		9429D0AE2015B33F005D3ABE /* libpngwriter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9429D0AC2015B33F005D3ABE /* libpngwriter.a */; };
 		9429D0AF2015B33F005D3ABE /* libpngwriter.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9429D0AD2015B33F005D3ABE /* libpngwriter.dylib */; };
-		9429D0B4201709C6005D3ABE /* SceneObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9429D0B3201709C6005D3ABE /* SceneObject.cpp */; };
 		946720061FCB7404004D5287 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 946720051FCB7404004D5287 /* main.cpp */; };
+		946A9C592245462A00BC2D17 /* SceneObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 946A9C532245462A00BC2D17 /* SceneObject.cpp */; };
 		94DE56C720199508004B1FBF /* canal-hill.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 94DE56C620199508004B1FBF /* canal-hill.obj */; };
 		94DE56CE201E671B004B1FBF /* Raycaster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94DE56CD201E671B004B1FBF /* Raycaster.cpp */; };
 /* End PBXBuildFile section */
@@ -48,22 +48,22 @@
 		9429D0A72015ABE1005D3ABE /* libpng16.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpng16.dylib; path = ../../../../../opt/local/lib/libpng16.dylib; sourceTree = "<group>"; };
 		9429D0AC2015B33F005D3ABE /* libpngwriter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpngwriter.a; path = ../../../../../opt/local/lib/libpngwriter.a; sourceTree = "<group>"; };
 		9429D0AD2015B33F005D3ABE /* libpngwriter.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpngwriter.dylib; path = ../../../../../opt/local/lib/libpngwriter.dylib; sourceTree = "<group>"; };
-		9429D0B02017040E005D3ABE /* Tri.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Tri.h; path = ../Tri.h; sourceTree = "<group>"; };
-		9429D0B22017066A005D3ABE /* SceneObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SceneObject.h; path = ../SceneObject.h; sourceTree = "<group>"; };
-		9429D0B3201709C6005D3ABE /* SceneObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SceneObject.cpp; path = ../SceneObject.cpp; sourceTree = "<group>"; };
 		946720021FCB7404004D5287 /* MaxFoleyRender */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MaxFoleyRender; sourceTree = BUILT_PRODUCTS_DIR; };
 		946720051FCB7404004D5287 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		9467200C1FCB7538004D5287 /* Ray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Ray.h; path = ../Ray.h; sourceTree = "<group>"; };
-		9467200D1FCB7BA4004D5287 /* Vector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Vector.h; path = ../Vector.h; sourceTree = "<group>"; };
-		9467200E1FCB9326004D5287 /* Color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Color.h; path = ../Color.h; sourceTree = "<group>"; };
-		9467200F1FCB958D004D5287 /* Light.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Light.h; path = ../Light.h; sourceTree = "<group>"; };
-		946720101FCB98ED004D5287 /* Surfel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Surfel.h; path = ../Surfel.h; sourceTree = "<group>"; };
-		946720111FCB9C16004D5287 /* Material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Material.h; path = ../Material.h; sourceTree = "<group>"; };
-		946720121FCB9CBF004D5287 /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Camera.h; path = ../Camera.h; sourceTree = "<group>"; };
-		9493ADEB2033D304002917BC /* TriTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TriTree.h; sourceTree = "<group>"; };
+		946A9C4E224545E600BC2D17 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		946A9C4F224545F100BC2D17 /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
+		946A9C502245460500BC2D17 /* Light.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Light.h; sourceTree = "<group>"; };
+		946A9C512245461500BC2D17 /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
+		946A9C522245462A00BC2D17 /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
+		946A9C532245462A00BC2D17 /* SceneObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneObject.cpp; sourceTree = "<group>"; };
+		946A9C542245462A00BC2D17 /* SceneObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneObject.h; sourceTree = "<group>"; };
+		946A9C552245462A00BC2D17 /* Surfel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Surfel.h; sourceTree = "<group>"; };
+		946A9C562245462A00BC2D17 /* Tri.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tri.h; sourceTree = "<group>"; };
+		946A9C572245462A00BC2D17 /* TriTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriTree.h; sourceTree = "<group>"; };
+		946A9C582245462A00BC2D17 /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
+		946A9C5A2245464A00BC2D17 /* Ray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ray.h; sourceTree = "<group>"; };
 		9493ADEC2033D542002917BC /* Box.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Box.h; sourceTree = "<group>"; };
 		94DE56C620199508004B1FBF /* canal-hill.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = "canal-hill.obj"; path = "resources/canal-hill.obj"; sourceTree = "<group>"; };
-		94DE56CB2019A728004B1FBF /* Scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Scene.h; path = ../Scene.h; sourceTree = "<group>"; };
 		94DE56CC201E6629004B1FBF /* Raycaster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Raycaster.h; sourceTree = "<group>"; };
 		94DE56CD201E671B004B1FBF /* Raycaster.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Raycaster.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,21 +127,21 @@
 			isa = PBXGroup;
 			children = (
 				9493ADEC2033D542002917BC /* Box.h */,
-				946720121FCB9CBF004D5287 /* Camera.h */,
-				9467200E1FCB9326004D5287 /* Color.h */,
-				9467200F1FCB958D004D5287 /* Light.h */,
+				946A9C4F224545F100BC2D17 /* Color.h */,
+				946A9C4E224545E600BC2D17 /* Camera.h */,
+				946A9C502245460500BC2D17 /* Light.h */,
 				946720051FCB7404004D5287 /* main.cpp */,
-				946720111FCB9C16004D5287 /* Material.h */,
-				9467200C1FCB7538004D5287 /* Ray.h */,
+				946A9C512245461500BC2D17 /* Material.h */,
+				946A9C5A2245464A00BC2D17 /* Ray.h */,
 				94DE56CD201E671B004B1FBF /* Raycaster.cpp */,
 				94DE56CC201E6629004B1FBF /* Raycaster.h */,
-				94DE56CB2019A728004B1FBF /* Scene.h */,
-				9429D0B3201709C6005D3ABE /* SceneObject.cpp */,
-				9429D0B22017066A005D3ABE /* SceneObject.h */,
-				946720101FCB98ED004D5287 /* Surfel.h */,
-				9429D0B02017040E005D3ABE /* Tri.h */,
-				9493ADEB2033D304002917BC /* TriTree.h */,
-				9467200D1FCB7BA4004D5287 /* Vector.h */,
+				946A9C522245462A00BC2D17 /* Scene.h */,
+				946A9C532245462A00BC2D17 /* SceneObject.cpp */,
+				946A9C542245462A00BC2D17 /* SceneObject.h */,
+				946A9C552245462A00BC2D17 /* Surfel.h */,
+				946A9C562245462A00BC2D17 /* Tri.h */,
+				946A9C572245462A00BC2D17 /* TriTree.h */,
+				946A9C582245462A00BC2D17 /* Vector.h */,
 			);
 			path = MaxFoleyRender;
 			sourceTree = "<group>";
@@ -204,7 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				946720061FCB7404004D5287 /* main.cpp in Sources */,
-				9429D0B4201709C6005D3ABE /* SceneObject.cpp in Sources */,
+				946A9C592245462A00BC2D17 /* SceneObject.cpp in Sources */,
 				94DE56CE201E671B004B1FBF /* Raycaster.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
